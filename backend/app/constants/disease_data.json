@@ -1,0 +1,236 @@
+{
+  "Anthracnose": {
+    "susceptible_species": ["Aloe Vera", "Snake Plant"],
+    "treatment_duration_days": 14,
+    "en": {
+      "advice": "Anthracnose is a fungal disease causing dark, sunken lesions on leaves and stems. Immediately remove and dispose of all infected leaves. Apply neem oil or a copper-based fungicide every 5–7 days for 2 weeks. Ensure good air circulation and avoid overhead watering. Sterilize any tools used to prevent spread.",
+      "care_adjustments": {
+        "watering_guide": "Minimum",
+        "watering_frequency_days": 14,
+        "mist_frequency_days": 0,
+        "sunlight_adjustment": "Maintain bright indirect light, maximize air circulation around the plant",
+        "fertilize_pause": true,
+        "notes": "Reduce watering significantly — excess moisture accelerates fungal spread. Stop misting entirely. Pause all fertilization during treatment period."
+      }
+    },
+    "vi": {
+      "advice": "Bệnh thán thư là bệnh nấm gây ra các vết thương tối màu, lõm xuống trên lá và thân. Ngay lập tức cắt bỏ và tiêu hủy tất cả lá bị nhiễm. Phun dầu neem hoặc thuốc diệt nấm gốc đồng mỗi 5–7 ngày trong 2 tuần. Đảm bảo thông thoáng khí và tránh tưới nước từ trên xuống. Khử trùng dụng cụ sau khi sử dụng để ngăn lây lan.",
+      "care_adjustments": {
+        "watering_guide": "Minimum",
+        "watering_frequency_days": 14,
+        "mist_frequency_days": 0,
+        "sunlight_adjustment": "Duy trì ánh sáng gián tiếp hoàn toàn, tối đa hóa thông gió xung quanh cây",
+        "fertilize_pause": true,
+        "notes": "Giảm tưới nước đáng kể — độ ẩm thừa làm nấm lây lan nhanh hơn. Ngừng phun sương hoàn toàn. Tạm dừng bón phân trong suốt quá trình điều trị."
+      }
+    }
+  },
+  "Leaf Spot": {
+    "susceptible_species": ["Aloe Vera"],
+    "treatment_duration_days": 14,
+    "en": {
+      "advice": "Leaf spot is caused by fungal or bacterial pathogens producing brown or yellow circular spots on leaves. Remove all spotted leaves immediately. Apply a copper fungicide or neem oil spray every 7 days. Water only at the soil level — never wet the foliage. Improve air circulation by spacing plants further apart.",
+      "care_adjustments": {
+        "watering_guide": "Minimum",
+        "watering_frequency_days": 12,
+        "mist_frequency_days": 0,
+        "sunlight_adjustment": "Bright indirect light, maximize plant spacing for airflow",
+        "fertilize_pause": true,
+        "notes": "Keep foliage completely dry at all times. Water only at the base. Stop misting. No fertilizer until new healthy growth appears."
+      }
+    },
+    "vi": {
+      "advice": "Đốm lá do nấm hoặc vi khuẩn gây ra các đốm tròn nâu hoặc vàng trên lá. Cắt bỏ ngay tất cả lá có đốm. Phun thuốc diệt nấm gốc đồng hoặc dầu neem mỗi 7 ngày. Chỉ tưới ở mức đất — không bao giờ làm ướt lá. Cải thiện lưu thông không khí bằng cách đặt cây xa nhau hơn.",
+      "care_adjustments": {
+        "watering_guide": "Minimum",
+        "watering_frequency_days": 12,
+        "mist_frequency_days": 0,
+        "sunlight_adjustment": "Ánh sáng gián tiếp sáng, tối đa hóa khoảng cách giữa các cây để tăng lưu thông khí",
+        "fertilize_pause": true,
+        "notes": "Giữ bộ lá hoàn toàn khô mọi lúc. Chỉ tưới ở gốc. Ngừng phun sương. Không bón phân cho đến khi lá mới khỏe mạnh xuất hiện."
+      }
+    }
+  },
+  "Rust": {
+    "susceptible_species": ["Aloe Vera"],
+    "treatment_duration_days": 21,
+    "en": {
+      "advice": "Rust is a fungal disease producing orange-brown powdery pustules on leaf undersides. Isolate the plant immediately to prevent spread. Remove all rust-affected leaves and dispose of them — do not compost. Apply a sulfur-based or neem oil fungicide weekly. Keep the plant in a well-ventilated area and avoid any water contact with leaves.",
+      "care_adjustments": {
+        "watering_guide": "Minimum",
+        "watering_frequency_days": 14,
+        "mist_frequency_days": 0,
+        "sunlight_adjustment": "Isolate completely in a well-ventilated, bright indirect light area",
+        "fertilize_pause": true,
+        "notes": "Isolate plant from others immediately. Rust spreads easily via water droplets and air. Reduce watering and stop all misting. No fertilizer during treatment."
+      }
+    },
+    "vi": {
+      "advice": "Bệnh gỉ sắt là bệnh nấm tạo ra các mụn nước màu cam-nâu dạng bột ở mặt dưới lá. Cách ly cây ngay lập tức để ngăn lây lan. Cắt bỏ tất cả lá bị gỉ sắt và tiêu hủy — không ủ phân. Phun thuốc diệt nấm gốc lưu huỳnh hoặc dầu neem hàng tuần. Đặt cây nơi thông thoáng và tránh hoàn toàn việc làm ướt lá.",
+      "care_adjustments": {
+        "watering_guide": "Minimum",
+        "watering_frequency_days": 14,
+        "mist_frequency_days": 0,
+        "sunlight_adjustment": "Cách ly hoàn toàn ở khu vực thông thoáng, có ánh sáng gián tiếp sáng",
+        "fertilize_pause": true,
+        "notes": "Cách ly cây khỏi các cây khác ngay lập tức. Bệnh gỉ sắt lây lan dễ dàng qua giọt nước và không khí. Giảm tưới và ngừng phun sương hoàn toàn. Không bón phân trong thời gian điều trị."
+      }
+    }
+  },
+  "Sunburn": {
+    "susceptible_species": ["Aloe Vera"],
+    "treatment_duration_days": 10,
+    "en": {
+      "advice": "Sunburn causes bleached, white, or brown crispy patches on leaves exposed to direct harsh sunlight. Move the plant immediately to a location with bright indirect light only. Trim severely burned leaves at the base using sterilized scissors. Do not fertilize while the plant is recovering. Keep soil consistently moist to support recovery.",
+      "care_adjustments": {
+        "watering_guide": "Average",
+        "watering_frequency_days": 6,
+        "mist_frequency_days": 2,
+        "sunlight_adjustment": "Move immediately to medium or bright indirect light, completely away from direct sun exposure",
+        "fertilize_pause": true,
+        "notes": "Sunburn is environmental damage, not infectious. Move to indirect light immediately. Slightly increase misting to support recovery. Pause all fertilizer until new healthy growth appears."
+      }
+    },
+    "vi": {
+      "advice": "Cháy nắng gây ra các vết bạc màu, trắng hoặc nâu giòn trên lá tiếp xúc trực tiếp với ánh nắng gay gắt. Di chuyển cây ngay đến nơi chỉ có ánh sáng gián tiếp sáng. Cắt tỉa lá bị cháy nặng ở gốc bằng kéo đã khử trùng. Không bón phân khi cây đang hồi phục. Giữ đất ẩm đều đặn để hỗ trợ quá trình hồi phục.",
+      "care_adjustments": {
+        "watering_guide": "Average",
+        "watering_frequency_days": 6,
+        "mist_frequency_days": 2,
+        "sunlight_adjustment": "Di chuyển ngay lập tức đến nơi có ánh sáng gián tiếp vừa hoặc sáng, tránh xa hoàn toàn ánh nắng trực tiếp",
+        "fertilize_pause": true,
+        "notes": "Cháy nắng là tổn thương do môi trường, không lây nhiễm. Di chuyển vào bóng râm gián tiếp ngay lập tức. Tăng nhẹ phun sương để hỗ trợ phục hồi. Tạm dừng tất cả phân bón cho đến khi lá mới khỏe mạnh xuất hiện."
+      }
+    }
+  },
+  "Bacterial Wilt Disease": {
+    "susceptible_species": ["Money Plant"],
+    "treatment_duration_days": 7,
+    "en": {
+      "advice": "Bacterial wilt is caused by soilborne bacteria that block the plant's water-conducting vessels, causing rapid wilting and collapse. Unfortunately, there is no effective cure once infection is established. Remove and dispose of the infected plant immediately to prevent soil contamination. Disinfect the pot with a 10% bleach solution before reusing. Do not plant the same species in the same soil.",
+      "care_adjustments": {
+        "watering_guide": "Minimum",
+        "watering_frequency_days": 20,
+        "mist_frequency_days": 0,
+        "sunlight_adjustment": "Isolate immediately, keep in shaded or low indirect light to reduce plant transpiration strain",
+        "fertilize_pause": true,
+        "notes": "Reduce all care inputs. The bacteria thrive in wet soil — stop misting and cut watering drastically. If wilting is total and irreversible, remove the plant to protect others. No fertilizer."
+      }
+    },
+    "vi": {
+      "advice": "Bệnh héo vi khuẩn do vi khuẩn trong đất làm tắc nghẽn mạch dẫn nước của cây, gây héo nhanh và cây chết. Đáng tiếc là không có thuốc chữa hiệu quả sau khi đã nhiễm. Loại bỏ và tiêu hủy ngay cây bị nhiễm để ngăn ô nhiễm đất. Khử trùng chậu bằng dung dịch clo 10% trước khi tái sử dụng. Không trồng cùng loại cây trong đất đó nữa.",
+      "care_adjustments": {
+        "watering_guide": "Minimum",
+        "watering_frequency_days": 20,
+        "mist_frequency_days": 0,
+        "sunlight_adjustment": "Cách ly ngay lập tức, giữ trong bóng râm hoặc ánh sáng gián tiếp thấp để giảm áp lực thoát hơi nước của cây",
+        "fertilize_pause": true,
+        "notes": "Giảm tất cả việc chăm sóc. Vi khuẩn phát triển mạnh trong đất ẩm — ngừng phun sương và cắt giảm tưới nước mạnh. Nếu héo hoàn toàn và không thể phục hồi, loại bỏ cây để bảo vệ cây khác. Không bón phân."
+      }
+    }
+  },
+  "Manganese Toxicity": {
+    "susceptible_species": ["Money Plant"],
+    "treatment_duration_days": 21,
+    "en": {
+      "advice": "Manganese toxicity occurs when excess manganese accumulates in the soil, causing brown leaf margins, interveinal chlorosis, and stunted growth. Flush the soil thoroughly by watering heavily with clean water 3–4 times to leach out the excess minerals. If possible, repot the plant with fresh, well-draining potting mix. Balance soil pH to 6.0–6.5 to reduce manganese availability. Stop using fertilizers containing manganese.",
+      "care_adjustments": {
+        "watering_guide": "Average",
+        "watering_frequency_days": 7,
+        "mist_frequency_days": 4,
+        "sunlight_adjustment": "Keep in stable bright indirect light to encourage healthy metabolic recovery growth",
+        "fertilize_pause": true,
+        "notes": "Flush soil generously to dilute mineral buildup. Avoid all fertilizer until new healthy growth confirms recovery. Normal watering can resume after flushing phase is complete."
+      }
+    },
+    "vi": {
+      "advice": "Ngộ độc mangan xảy ra khi mangan dư thừa tích tụ trong đất, gây nâu mép lá, vàng giữa gân lá và còi cọc. Xả đất kỹ bằng cách tưới nhiều nước sạch 3–4 lần để rửa trôi khoáng chất dư thừa. Nếu có thể, thay chậu với đất trồng mới thoát nước tốt. Cân bằng pH đất về 6.0–6.5 để giảm khả dụng của mangan. Ngừng sử dụng phân bón có chứa mangan.",
+      "care_adjustments": {
+        "watering_guide": "Average",
+        "watering_frequency_days": 7,
+        "mist_frequency_days": 4,
+        "sunlight_adjustment": "Giữ trong ánh sáng gián tiếp sáng ổn định để khuyến khích sự phát triển trao đổi chất phục hồi khỏe mạnh",
+        "fertilize_pause": true,
+        "notes": "Xả đất nhiều để pha loãng khoáng chất tích tụ. Tránh tất cả phân bón cho đến khi lá mới khỏe mạnh xác nhận cây đã hồi phục. Tưới nước bình thường có thể tiếp tục sau giai đoạn xả đất."
+      }
+    }
+  },
+  "Leaf Withering": {
+    "susceptible_species": ["Snake Plant"],
+    "treatment_duration_days": 14,
+    "en": {
+      "advice": "Leaf withering can result from overwatering causing root rot, underwatering, low humidity, or root-bound conditions. First, check the root system — trim any brown, mushy roots and allow the soil to dry out if overwatering is suspected. Evaluate your watering routine and adjust accordingly. Increase ambient humidity and ensure the plant is not root-bound. Repot if necessary.",
+      "care_adjustments": {
+        "watering_guide": "Minimum",
+        "watering_frequency_days": 10,
+        "mist_frequency_days": 2,
+        "sunlight_adjustment": "Medium indirect light to prevent excessive transpiration and further moisture stress",
+        "fertilize_pause": true,
+        "notes": "Reduce watering immediately and check for root rot. Increase humidity via misting. Pause all fertilizer. Monitor closely for 2 weeks and adjust based on recovery progress."
+      }
+    },
+    "vi": {
+      "advice": "Héo lá có thể do tưới quá nhiều gây thối rễ, tưới quá ít, độ ẩm thấp hoặc rễ bị bó chặt. Đầu tiên, kiểm tra hệ rễ — cắt bỏ rễ nâu mềm và để đất khô nếu nghi ngờ tưới quá nhiều. Đánh giá lại thói quen tưới nước và điều chỉnh phù hợp. Tăng độ ẩm môi trường và đảm bảo rễ không bị bó chặt. Thay chậu nếu cần thiết.",
+      "care_adjustments": {
+        "watering_guide": "Minimum",
+        "watering_frequency_days": 10,
+        "mist_frequency_days": 2,
+        "sunlight_adjustment": "Ánh sáng gián tiếp vừa phải để ngăn tình trạng thoát hơi nước quá mức và stress do thiếu ẩm thêm",
+        "fertilize_pause": true,
+        "notes": "Giảm tưới nước ngay và kiểm tra thối rễ. Tăng độ ẩm bằng phun sương. Tạm dừng tất cả phân bón. Theo dõi chặt trong 2 tuần và điều chỉnh dựa trên tiến trình phục hồi."
+      }
+    }
+  },
+  "Fungal Leaf Spot": {
+    "susceptible_species": ["Spider Plant"],
+    "treatment_duration_days": 14,
+    "en": {
+      "advice": "Fungal leaf spot produces circular spots with yellow halos on leaves, spreading rapidly in humid conditions. Remove all affected leaves immediately. Apply neem oil or a copper fungicide spray every 5–7 days for 2 weeks. Ensure the plant has excellent airflow. Avoid overhead watering entirely and do not mist during treatment. Keep tools sterilized.",
+      "care_adjustments": {
+        "watering_guide": "Minimum",
+        "watering_frequency_days": 14,
+        "mist_frequency_days": 0,
+        "sunlight_adjustment": "Bright indirect light with superior airflow and cross-ventilation",
+        "fertilize_pause": true,
+        "notes": "Keep foliage dry at all times — fungal spores spread through moisture. Bottom-water only. Stop misting completely. No fertilizer during the full treatment period."
+      }
+    },
+    "vi": {
+      "advice": "Đốm lá do nấm tạo ra các đốm tròn có quầng vàng trên lá, lây lan nhanh trong điều kiện ẩm ướt. Cắt bỏ ngay tất cả lá bị ảnh hưởng. Phun dầu neem hoặc thuốc diệt nấm đồng mỗi 5–7 ngày trong 2 tuần. Đảm bảo cây có lưu thông không khí tốt. Tránh hoàn toàn tưới từ trên và không phun sương trong thời gian điều trị. Giữ dụng cụ được khử trùng.",
+      "care_adjustments": {
+        "watering_guide": "Minimum",
+        "watering_frequency_days": 14,
+        "mist_frequency_days": 0,
+        "sunlight_adjustment": "Ánh sáng gián tiếp sáng với lưu thông khí tối ưu và thông gió chéo",
+        "fertilize_pause": true,
+        "notes": "Giữ bộ lá khô mọi lúc — bào tử nấm lây lan qua độ ẩm. Chỉ tưới từ dưới. Ngừng phun sương hoàn toàn. Không bón phân trong toàn bộ thời gian điều trị."
+      }
+    }
+  },
+  "Leaf Tip Necrosis": {
+    "susceptible_species": ["Spider Plant"],
+    "treatment_duration_days": 10,
+    "en": {
+      "advice": "Leaf tip necrosis — browning and dying of leaf tips — is typically caused by low humidity, fluoride or salt buildup in the soil from tap water, inconsistent watering, or physical damage. Trim brown tips with sterilized scissors at a slight angle. If using tap water, switch to filtered or distilled water. Flush the soil with clean water to remove mineral buildup. Increase ambient humidity.",
+      "care_adjustments": {
+        "watering_guide": "Average",
+        "watering_frequency_days": 7,
+        "mist_frequency_days": 1,
+        "sunlight_adjustment": "Bright indirect light, protect from dry heater drafts or air conditioning vents",
+        "fertilize_pause": false,
+        "notes": "Necrosis at tips is usually environmental, not infectious. Increase misting to raise humidity. Switch to filtered water if using tap water. Normal watering frequency can continue."
+      }
+    },
+    "vi": {
+      "advice": "Hoại tử đầu lá — đầu lá chuyển nâu và chết — thường do độ ẩm thấp, flo hoặc muối tích tụ trong đất từ nước máy, tưới không đều, hoặc tổn thương vật lý. Cắt phần đầu lá nâu bằng kéo khử trùng theo góc nhẹ. Nếu dùng nước máy, chuyển sang nước lọc hoặc nước cất. Xả đất bằng nước sạch để loại bỏ khoáng tích tụ. Tăng độ ẩm môi trường.",
+      "care_adjustments": {
+        "watering_guide": "Average",
+        "watering_frequency_days": 7,
+        "mist_frequency_days": 1,
+        "sunlight_adjustment": "Ánh sáng gián tiếp sáng, bảo vệ khỏi luồng gió khô từ lò sưởi hoặc họng điều hòa",
+        "fertilize_pause": false,
+        "notes": "Hoại tử đầu lá thường do môi trường, không lây nhiễm. Tăng phun sương để nâng độ ẩm. Chuyển sang nước lọc nếu dùng nước máy. Tần suất tưới nước bình thường có thể tiếp tục."
+      }
+    }
+  }
+}

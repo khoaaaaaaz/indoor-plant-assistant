@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================================================
+   BOTANICAL MINIMALISM — Design System CSS Variables
+   Based on DESIGN.md (Material Design 3 "Nature-In" palette)
+   ================================================================ */
+
+@layer base {
+  :root {
+    /* ─── Background & Surface ─── */
+    --background: 48 33% 97%;
+    /* #faf9f5 — Creamy Surface */
+    --foreground: 90 4% 11%;
+    /* #1b1c1a — On-Surface */
+
+    /* ─── Card / Elevated Surfaces ─── */
+    --card: 0 0% 100%;
+    /* #ffffff — Crisp White */
+    --card-foreground: 90 4% 11%;
+    /* #1b1c1a */
+
+    /* ─── Popover ─── */
+    --popover: 0 0% 100%;
+    --popover-foreground: 90 4% 11%;
+
+    /* ─── Primary — Forest Green ─── */
+    --primary: 148 22% 23%;
+    /* #2d4739 — Primary Container (main action color) */
+    --primary-foreground: 0 0% 100%;
+    /* #ffffff */
+
+    /* ─── Secondary — Sage Green ─── */
+    --secondary: 111 21% 33%;
+    /* #486643 */
+    --secondary-foreground: 0 0% 100%;
+    /* #ffffff */
+
+    /* ─── Muted — Surface Container ─── */
+    --muted: 60 5% 93%;
+    /* #efeeea — Surface Container */
+    --muted-foreground: 144 7% 27%;
+    /* #424844 — On-Surface Variant */
+
+    /* ─── Accent — Secondary Container (Sage Tint) ─── */
+    --accent: 107 44% 83%;
+    /* #c7e9bd — Secondary Container */
+    --accent-foreground: 111 21% 35%;
+    /* #4c6a46 — On-Secondary Container */
+
+    /* ─── Destructive — Error ─── */
+    --destructive: 0 75% 42%;
+    /* #ba1a1a */
+    --destructive-foreground: 0 0% 98%;
+
+    /* ─── Border & Input ─── */
+    --border: 120 5% 77%;
+    /* #c2c8c2 — Outline Variant */
+    --input: 120 5% 77%;
+    --ring: 148 22% 23%;
+    /* Forest Green */
+
+    /* ─── Radius ─── */
+    --radius: 1rem;
+    /* 16px base — soft, rounded corners */
+
+    /* ─── Sidebar (Desktop) ─── */
+    --sidebar-background: 0 0% 100%;
+    /* #ffffff — clean sidebar */
+    --sidebar-foreground: 90 4% 11%;
+    --sidebar-primary: 148 22% 23%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 107 44% 83%;
+    --sidebar-accent-foreground: 111 21% 35%;
+    --sidebar-border: 60 5% 93%;
+    --sidebar-ring: 148 22% 23%;
+  }
+
+  .dark {
+    --background: 150 30% 5%;
+    --foreground: 48 33% 97%;
+    --card: 150 25% 8%;
+    --card-foreground: 48 33% 97%;
+    --popover: 150 25% 8%;
+    --popover-foreground: 48 33% 97%;
+    --primary: 148 30% 35%;
+    --primary-foreground: 48 33% 97%;
+    --secondary: 111 20% 20%;
+    --secondary-foreground: 48 33% 97%;
+    --muted: 150 15% 12%;
+    --muted-foreground: 120 8% 70%;
+    --accent: 150 20% 15%;
+    --accent-foreground: 148 30% 45%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 150 15% 15%;
+    --input: 150 15% 15%;
+    --ring: 148 30% 35%;
+    --sidebar-background: 150 25% 6%;
+    --sidebar-foreground: 48 33% 97%;
+    --sidebar-primary: 148 30% 35%;
+    --sidebar-primary-foreground: 48 33% 97%;
+    --sidebar-accent: 150 20% 15%;
+    --sidebar-accent-foreground: 148 30% 45%;
+    --sidebar-border: 150 15% 15%;
+    --sidebar-ring: 148 30% 35%;
+  }
+
+  /* ─── Global Reset ─── */
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    margin: 0;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+/* ─── Typography Utilities ─── */
+@layer utilities {
+  .font-headline {
+    font-family: 'Newsreader', serif;
+  }
+
+  .font-body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  /* Scrollbar hiding for horizontal scroll containers */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Ambient shadow for cards (from sample screen designs) */
+  .ambient-shadow {
+    box-shadow: 0 8px 24px -4px rgba(23, 49, 36, 0.04),
+      0 2px 6px -1px rgba(23, 49, 36, 0.02);
+  }
+
+  /* Safe area padding for mobile bottom nav */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

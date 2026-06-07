@@ -1,0 +1,27 @@
+fastapi==0.110.0
+uvicorn==0.28.0
+sqlalchemy==2.0.28
+psycopg2-binary==2.9.9
+pydantic==2.6.4
+python-multipart==0.0.9
+email-validator==2.1.1
+PyJWT==2.8.0
+passlib==1.7.4
+bcrypt==4.0.1
+python-jose==3.3.0
+cryptography==41.0.7
+
+# Week 3: External API Integration
+requests==2.31.0  # For Perenual and Open-Meteo API calls
+Pillow==10.1.0  # For image preprocessing in AI service
+httpx>=0.27.0  # For async Gemini API calls
+cloudinary==1.39.0  # For cloud image storage
+
+# Week 3: Database Migrations
+alembic==1.13.1  # SQLAlchemy schema migration tool
+
+# Future: AI/ML (uncomment when ready for Week 4)
+tensorflow>=2.16.1
+keras>=3.0.0
+numpy==1.24.3
+opencv-python-headless==4.8.1.78

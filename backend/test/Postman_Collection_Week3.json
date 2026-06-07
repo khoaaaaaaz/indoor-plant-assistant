@@ -1,0 +1,192 @@
+{
+	"info": {
+		"name": "Indoor Plant Assistant - Week 3 (AI Ready)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"ai_tester@example.com\",\r\n  \"password\": \"TestPassword123!\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/users/register",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					}
+				},
+				{
+					"name": "Login (Auto-Saves Token)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"TOKEN\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"ai_tester@example.com\",\r\n  \"password\": \"TestPassword123!\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/users/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Plants",
+			"item": [
+				{
+					"name": "Create Plant (Aloe Vera)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"PLANT_ID\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"My AI Test Aloe\",\r\n  \"species\": \"Aloe Vera\",\r\n  \"next_water_date\": \"2026-05-15\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/plants",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"plants"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "3. AI Scanning",
+			"item": [
+				{
+					"name": "Upload & Scan Image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "plant_id",
+									"value": "{{PLANT_ID}}",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": ""
+								},
+								{
+									"key": "latitude",
+									"value": "21.0285",
+									"type": "text"
+								},
+								{
+									"key": "longitude",
+									"value": "105.8542",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/scan",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"scan"
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:8000"
+		},
+		{
+			"key": "TOKEN",
+			"value": ""
+		},
+		{
+			"key": "PLANT_ID",
+			"value": "1"
+		}
+	]
+}
