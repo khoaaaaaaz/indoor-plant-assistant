@@ -144,7 +144,7 @@ IMPORTANT: The care_adjustments values should reflect what the plant NEEDS durin
                         "response_mime_type": "application/json",
                     },
                 },
-                timeout=15.0,
+                timeout=60.0,
             )
             response.raise_for_status()
             data = response.json()

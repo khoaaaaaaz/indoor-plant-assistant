@@ -8,16 +8,17 @@ export function useImageCapture() {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => {
+        URL.revokeObjectURL(img.src);
         const size = Math.min(img.width, img.height);
         const canvas = document.createElement('canvas');
         canvas.width = size;
         canvas.height = size;
         const ctx = canvas.getContext('2d');
         if (!ctx) return reject(new Error('Canvas ctx null'));
-        
+
         const startX = (img.width - size) / 2;
         const startY = (img.height - size) / 2;
-        
+
         ctx.drawImage(img, startX, startY, size, size, 0, 0, size, size);
         canvas.toBlob(
           (blob) => {
@@ -28,7 +29,10 @@ export function useImageCapture() {
           1.0
         );
       };
-      img.onerror = reject;
+      img.onerror = (err) => {
+        URL.revokeObjectURL(img.src);
+        reject(err);
+      };
       img.src = URL.createObjectURL(file);
     });
   };
@@ -36,7 +40,7 @@ export function useImageCapture() {
   const prepareImage = async (file: File): Promise<File> => {
     // 1. Crop to square to prevent backend distortion
     const squaredFile = await squareCrop(file);
-    
+
     // 2. Compress (relaxed limits for better model accuracy)
     return await imageCompression(squaredFile, {
       maxSizeMB: 1, // Increased from 0.2MB to retain texture details

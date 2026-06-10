@@ -1,27 +1,33 @@
 // src/components/layout/Sidebar.tsx
 import { useEffect } from 'react';
-import { Show, UserButton, useAuth } from '@clerk/react';
+import { Show, UserButton, useAuth, useUser } from '@clerk/react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Home, CalendarDays, Scan, Settings, ShieldCheck } from 'lucide-react';
 import { useAdminStore } from '@/store/adminStore';
+import { useTranslation } from 'react-i18next';
 
 interface NavItem {
   icon: React.ReactNode;
-  label: string;
+  translationKey: string;
+  defaultLabel: string;
   href: string;
 }
 
 const navItems: NavItem[] = [
-  { icon: <Home className="h-5 w-5" />, label: 'My Garden', href: '/' },
-  { icon: <CalendarDays className="h-5 w-5" />, label: 'Care', href: '/care' },
-  { icon: <Settings className="h-5 w-5" />, label: 'Settings', href: '/settings' },
+  { icon: <Home className="h-5 w-5" />, translationKey: 'nav.myGarden', defaultLabel: 'My Garden', href: '/' },
+  { icon: <CalendarDays className="h-5 w-5" />, translationKey: 'nav.care', defaultLabel: 'Care', href: '/care' },
+  { icon: <Settings className="h-5 w-5" />, translationKey: 'nav.settings', defaultLabel: 'Settings', href: '/settings' },
 ];
 
 export function Sidebar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { isSignedIn } = useAuth();
+  const { user } = useUser();
   const { isAdmin, checkAdmin } = useAdminStore();
+  const { t } = useTranslation();
+
+  const displayName = user?.fullName || user?.firstName || user?.username || 'Plant Parent';
 
   useEffect(() => {
     if (isSignedIn) {
@@ -43,9 +49,9 @@ export function Sidebar() {
               }}
             />
           </div>
-          <p className="font-headline text-lg font-semibold text-primary">Plant Parent</p>
+          <p className="font-headline text-lg font-semibold text-primary">{displayName}</p>
           <span className="text-label-sm text-muted-foreground mt-1 px-3 py-1 bg-muted rounded-full">
-            Indoor Gardener
+            {t('nav.gardenerRole', 'Indoor Gardener')}
           </span>
         </div>
       </Show>
@@ -58,7 +64,7 @@ export function Sidebar() {
 
           return (
             <Link
-              key={item.label}
+              key={item.translationKey}
               to={item.href}
               className={`
                 flex items-center gap-3 px-4 py-3 rounded-xl text-label-sm font-semibold
@@ -70,7 +76,7 @@ export function Sidebar() {
               `}
             >
               {item.icon}
-              <span>{item.label}</span>
+              <span>{t(item.translationKey, item.defaultLabel)}</span>
             </Link>
           );
         })}
@@ -89,7 +95,7 @@ export function Sidebar() {
             `}
           >
             <ShieldCheck className="h-5 w-5" />
-            <span>Admin Control</span>
+            <span>{t('nav.adminControl', 'Admin Control')}</span>
           </Link>
         )}
       </nav>
@@ -101,7 +107,7 @@ export function Sidebar() {
           className="mt-auto bg-primary text-primary-foreground rounded-full py-3 px-4 text-label-sm font-semibold flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:bg-primary/90 transition-all active:scale-[0.98]"
         >
           <Scan className="h-4 w-4" />
-          Scan Plant
+          {t('nav.scanPlant', 'Scan Plant')}
         </button>
       </Show>
     </aside>

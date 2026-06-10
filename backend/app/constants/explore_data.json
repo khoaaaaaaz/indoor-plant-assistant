@@ -1,0 +1,142 @@
+{
+    "aloe vera": {
+        "fun_fact": "Ancient Egyptians called Aloe Vera the 'plant of immortality' and placed it among funeral gifts for pharaohs over 6,000 years ago.",
+        "faqs": [
+            {"q": "Why are my Aloe leaves turning brown or soft?", "a": "Usually overwatering or root rot. Let the soil dry completely between waterings and use a well-draining succulent pot."},
+            {"q": "Can I use the gel directly on skin?", "a": "Yes! Cut a mature outer leaf, scoop the clear gel, and apply to burns or dry skin. Always patch-test first."},
+            {"q": "How much light does Aloe Vera need?", "a": "It thrives in bright, direct sunlight or very bright indirect light. Too little light causes weak, droopy leaves."},
+            {"q": "What kind of soil is best?", "a": "Use a well-drained cactus or succulent potting mix with extra perlite or sand to prevent moisture retention."},
+            {"q": "How do I propagate Aloe Vera?", "a": "Separate the offsets or 'pups' that grow at the base of the parent plant once they are a few inches tall."}
+        ]
+    },
+    "monstera": {
+        "fun_fact": "Monstera's iconic split leaves evolved to let wind pass through without damaging the plant — and to allow sunlight to reach lower leaves in dense jungles.",
+        "faqs": [
+            {"q": "Why doesn't my Monstera have holes yet?", "a": "Young leaves are solid. Splits (fenestrations) typically appear after 2-3 years if the plant receives sufficient bright indirect light."},
+            {"q": "Should I use a moss pole?", "a": "Yes! Monstera is a natural climber. A moss pole encourages larger leaves and a more compact, upright growth pattern."},
+            {"q": "Why are my Monstera leaves dripping water?", "a": "This is guttation. It happens when the soil is wet and the plant releases excess moisture. Reduce watering frequency."},
+            {"q": "What causes yellow leaves on a Monstera?", "a": "Typically overwatering or poor drainage. Check if soil is soggy, let it dry out, and ensure the pot has drainage holes."},
+            {"q": "How do I propagate my Monstera?", "a": "Cut just below a node (with or without aerial roots) and place the stem cutting in water or moist soil."}
+        ]
+    },
+    "snake plant": {
+        "fun_fact": "NASA's Clean Air Study found that Snake Plants are one of the best air-purifying houseplants, converting CO₂ to oxygen even at night — making them perfect bedroom companions.",
+        "faqs": [
+            {"q": "How often should I really water it?", "a": "Every 2-3 weeks in summer, once a month in winter. The #1 killer is overwatering. When in doubt, wait."},
+            {"q": "Can it survive in a dark room?", "a": "It tolerates low light but grows best in indirect sunlight. In very dark rooms, growth will be extremely slow."},
+            {"q": "Why is my Snake Plant falling over?", "a": "Usually root rot from overwatering or too deep a pot. Inspect roots, trim soft ones, and repot in dry, gritty soil."},
+            {"q": "How do I propagate a Snake Plant?", "a": "Divide the rhizomes during repotting, or cut a leaf into 3-inch sections and root them in water or sandy soil."},
+            {"q": "Why are the leaf tips turning brown?", "a": "Usually normal aging or minor physical damage. Trim the dead tips with clean shears, following the leaf shape."}
+        ]
+    },
+    "pothos": {
+        "fun_fact": "In the wild, Pothos can climb trees up to 20 meters tall, and its leaves grow up to 100cm wide — nothing like the small-leaved houseplant version we know!",
+        "faqs": [
+            {"q": "Why are the leaves turning yellow?", "a": "Usually overwatering. Check if the soil is soggy. Let the top inch dry out before watering again."},
+            {"q": "Can I grow it in just water?", "a": "Yes! Pothos thrives in water indefinitely. Change the water every 1-2 weeks and add liquid fertilizer monthly."},
+            {"q": "How do I make my Pothos bushier?", "a": "Prune the long vines. This stimulates new growth at the nodes and makes the plant fuller."},
+            {"q": "Why are the variegated patterns fading?", "a": "Too little light. Pothos needs bright, indirect light to maintain its white, cream, or yellow variegation."},
+            {"q": "Are Pothos toxic to pets?", "a": "Yes, they contain calcium oxalate crystals which cause mouth irritation and digestive discomfort. Keep them out of reach."}
+        ]
+    },
+    "spider plant": {
+        "fun_fact": "Spider Plants are champion air purifiers and one of the easiest houseplants to propagate — those dangling 'babies' (plantlets) can be snipped and rooted in water within days.",
+        "faqs": [
+            {"q": "Why do the leaf tips turn brown?", "a": "Typically caused by fluoride in tap water or low humidity. Try using filtered water and occasional misting."},
+            {"q": "How do I propagate the babies?", "a": "Snip a plantlet with a few inches of stem, place in water until roots form (~2 weeks), then plant in soil."},
+            {"q": "How much light does it need?", "a": "Bright, indirect light is ideal. They tolerate partial shade, but direct hot sun can scorch the leaves."},
+            {"q": "Why are the leaves pale or losing stripes?", "a": "Often a sign of too little light, under-fertilization, or the plant being severely root-bound."},
+            {"q": "How often should I water my Spider Plant?", "a": "Water thoroughly when the top 50% of the soil feels dry, usually once every 7-10 days."}
+        ]
+    },
+    "peace lily": {
+        "fun_fact": "Peace Lilies are drama queens — they dramatically wilt when thirsty, but bounce back within hours of watering, making them the perfect plant for forgetful owners.",
+        "faqs": [
+            {"q": "Why won't my Peace Lily flower?", "a": "It needs bright indirect light to bloom. In too-dark spots, it'll grow lush leaves but no white flowers."},
+            {"q": "Is it really toxic to pets?", "a": "Yes, it contains calcium oxalate crystals that cause mouth irritation if chewed. Keep away from curious cats and dogs."},
+            {"q": "Why are the leaves turning black or brown?", "a": "Usually chemical burn from tap water minerals, over-fertilizing, or direct sun scorch. Use filtered water."},
+            {"q": "How do I clean the leaves?", "a": "Wipe them down gently with a damp cloth every few weeks to keep them shiny and free of dust."},
+            {"q": "What type of soil does a Peace Lily prefer?", "a": "A well-draining potting mix rich in organic matter. Keep it consistently moist but not waterlogged."}
+        ]
+    },
+    "rubber plant": {
+        "fun_fact": "Rubber Plants (Ficus elastica) were once tapped for their milky latex sap to produce natural rubber — before the rubber tree (Hevea brasiliensis) replaced them commercially.",
+        "faqs": [
+            {"q": "Why is it dropping leaves?", "a": "Usually due to sudden temperature changes, cold drafts, or overwatering. Keep it in a stable, warm spot."},
+            {"q": "How do I make it branch out?", "a": "Prune the top growing point. This forces the plant to grow side shoots, creating a bushier shape."},
+            {"q": "Why are the leaves turning dull and dusty?", "a": "Wipe them with a damp cloth to remove dust. A clean leaf absorbs more light and stays healthy."},
+            {"q": "Is the white sap dangerous?", "a": "Yes, the latex sap is toxic and can cause skin irritation. Wear gloves when pruning or propagating."},
+            {"q": "How much sunlight does it require?", "a": "Bright, indirect light. Variegated cultivars need more light than the dark green varieties."}
+        ]
+    },
+    "orchid": {
+        "fun_fact": "Orchids are the largest family of flowering plants with over 28,000 species — that's more than mammals, birds, and reptiles combined!",
+        "faqs": [
+            {"q": "My orchid finished blooming. Is it dead?", "a": "No! Cut the flower spike above a node, keep watering weekly, and it can re-bloom in 2-3 months."},
+            {"q": "Should I use ice cubes to water?", "a": "It works but isn't ideal — orchids are tropical and prefer room-temperature water. Soak the roots for 10 minutes weekly."},
+            {"q": "Why are the roots turning gray or dry?", "a": "Healthy roots are green when wet and silvery-gray when dry. If gray, it's time to water."},
+            {"q": "What kind of potting medium do orchids need?", "a": "Never use standard soil. Orchids are epiphytes and need loose bark mix or sphagnum moss for aeration."},
+            {"q": "How do I trigger re-blooming?", "a": "Expose the orchid to slightly cooler night temperatures (around 15-18°C) for a few weeks in autumn."}
+        ]
+    },
+    "zz plant": {
+        "fun_fact": "ZZ Plants store water in their thick potato-like rhizomes underground — they can survive months of neglect, earning the nickname 'the eternity plant.'",
+        "faqs": [
+            {"q": "Is it really toxic?", "a": "It contains calcium oxalate crystals. Wash hands after handling and keep away from pets and children who might chew it."},
+            {"q": "Why is it growing so slowly?", "a": "ZZ Plants are naturally slow growers. In low light they grow even slower. Bright indirect light speeds things up."},
+            {"q": "Why are the stems bending or falling over?", "a": "This is usually due to severe overwatering causing stem/rhizome rot, or light deficiency causing leggy stems."},
+            {"q": "How often should I fertilize my ZZ Plant?", "a": "Only once or twice during the spring and summer growing season with a balanced liquid houseplant fertilizer."},
+            {"q": "How do I know if my ZZ Plant is overwatered?", "a": "Look for yellowing leaves, mushy brown stems, or a moldy smell from the soil."}
+        ]
+    },
+    "calathea": {
+        "fun_fact": "Calatheas are called 'prayer plants' because they fold their leaves upward at night like hands in prayer — a process called nyctinasty driven by their internal clock.",
+        "faqs": [
+            {"q": "Why are the leaf edges crispy?", "a": "Low humidity is the #1 cause. Calatheas love 50%+ humidity — use a humidifier or pebble tray."},
+            {"q": "Why are the colors fading?", "a": "Too much direct sun bleaches the patterns. Move to bright indirect light for the most vivid leaf colors."},
+            {"q": "What kind of water should I use?", "a": "Calatheas are highly sensitive to tap water chemicals. Use distilled, rainwater, or filtered water at room temperature."},
+            {"q": "How often should I water my Calathea?", "a": "Keep the soil consistently damp but never soggy. Water when the top inch of soil feels dry."},
+            {"q": "Why are there tiny webs on my Calathea?", "a": "A classic sign of spider mites, which love dry Calathea leaves. Increase humidity and treat with neem oil."}
+        ]
+    },
+    "jade plant": {
+        "fun_fact": "In East Asian tradition, Jade Plants (Crassula ovata) are believed to attract wealth and prosperity — which is why they're a classic housewarming and business-opening gift.",
+        "faqs": [
+            {"q": "Why are the leaves wrinkling?", "a": "Wrinkled leaves mean it's thirsty. Give it a thorough soak and it'll plump back up within a day."},
+            {"q": "Can it flower?", "a": "Yes! Mature Jade Plants (5+ years) can produce clusters of tiny star-shaped white-pink flowers in winter."},
+            {"q": "Why are the leaves falling off?", "a": "Often a result of overwatering, under-watering, or lack of light. Check soil moisture and adjust."},
+            {"q": "How do I prune a Jade plant?", "a": "Cut stems just above a leaf node. This encourages branching and helps maintain a sturdy, tree-like structure."},
+            {"q": "How much sun does it need?", "a": "At least 4-6 hours of direct sunlight daily. In low light, it will become leggy and weak."}
+        ]
+    },
+    "boston fern": {
+        "fun_fact": "Boston Ferns are living fossils — ferns have existed for 360 million years, predating dinosaurs, flowers, and even seeds.",
+        "faqs": [
+            {"q": "Why is it shedding so many leaves?", "a": "Low humidity or inconsistent watering. Ferns love moisture — mist daily and keep soil consistently damp (not soggy)."},
+            {"q": "Can it go outside in summer?", "a": "Yes! They thrive on shaded porches. Just bring them in before temperatures drop below 10°C (50°F)."},
+            {"q": "Why is my fern turning brown and dry?", "a": "Under-watering or dry air. Mist frequently, place in a bathroom, or use a pebble tray to boost humidity."},
+            {"q": "How do I fertilize my Boston Fern?", "a": "Feed monthly in spring and summer with a diluted, balanced liquid fertilizer. Avoid feeding in winter."},
+            {"q": "Can I trim dead fronds?", "a": "Yes! Cut dead or brown fronds at the base of the plant to keep it looking neat and encourage new growth."}
+        ]
+    },
+    "dracaena": {
+        "fun_fact": "The Dragon Tree (Dracaena draco) gets its name from its blood-red resin called 'dragon's blood,' which was used as dye, medicine, and varnish for centuries.",
+        "faqs": [
+            {"q": "Why are the lower leaves yellowing?", "a": "This is normal — Dracaenas naturally shed older lower leaves as they grow. Only worry if many leaves yellow at once."},
+            {"q": "Is fluoride in tap water a problem?", "a": "Yes! Dracaenas are very sensitive to fluoride, which causes brown leaf tips. Use filtered or distilled water."},
+            {"q": "How do I make my Dracaena bushier?", "a": "Cut the main stem. It will sprout new branches just below the cut, creating a fuller look."},
+            {"q": "What are the lighting requirements?", "a": "Medium to bright indirect light. Direct sun can burn leaves, while low light slows growth."},
+            {"q": "How often should I water my Dracaena?", "a": "Let the top 2 inches of soil dry completely between waterings. They are highly susceptible to root rot."}
+        ]
+    },
+    "venus flytrap": {
+        "fun_fact": "Venus Flytraps can count! A trap only snaps shut after TWO touches within 20 seconds — this prevents wasting energy on raindrops and debris.",
+        "faqs": [
+            {"q": "Should I feed it bugs?", "a": "Only if it's indoors and can't catch its own. One small insect per trap, once a month. Never feed it human food."},
+            {"q": "Why are the traps turning black?", "a": "Each trap has a lifespan of 3-5 closings, then dies. New traps grow from the center — it's normal."},
+            {"q": "What kind of water does it need?", "a": "Only use pure rainwater, distilled water, or demineralized water. Tap water will kill it due to minerals."},
+            {"q": "Does it need soil or fertilizer?", "a": "Never use standard soil or fertilizer. Use nutrient-poor peat moss and perlite. They get nutrients from prey."},
+            {"q": "Why is it dormant in winter?", "a": "They need a winter dormancy period of 3-4 months with cooler temperatures and less water to survive long-term."}
+        ]
+    }
+}

@@ -44,7 +44,7 @@ export function ScanResultCard({ result, onClose }: ScanResultCardProps) {
     
     onClose();
     navigate(`/plants/${tempId}`);
-    toast.success('Plant added to your garden! 🌿');
+    toast.success(t('scan.plantAdded', 'Plant added to your garden! 🌿'));
 
     try {
       const response = await plantApi.create(plantData);
@@ -56,7 +56,7 @@ export function ScanResultCard({ result, onClose }: ScanResultCardProps) {
     } catch (error) {
       console.error('Error adding plant:', error);
       rollbackPlant(tempId);
-      toast.error('Failed to add plant. Please try again.');
+      toast.error(t('scan.addFailed', 'Failed to add plant. Please try again.'));
       
       if (window.location.pathname === `/plants/${tempId}`) {
         navigate(`/dashboard`, { replace: true });

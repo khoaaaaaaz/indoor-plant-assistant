@@ -1,7 +1,9 @@
 import os
-# Suppress noisy TensorFlow startup warnings and oneDNN info logs
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
+# Prevent TensorFlow from starving WSL2/Docker of CPU threads
+os.environ["TF_NUM_INTRAOP_THREADS"] = "1"
+os.environ["TF_NUM_INTEROP_THREADS"] = "1"
 
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles

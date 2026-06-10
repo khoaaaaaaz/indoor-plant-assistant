@@ -154,11 +154,15 @@ export function PlantCareCalendar({ tasks, onComplete }: Props) {
   ];
   const monthName = t(`care.months.${month}`);
 
-  // ─── Quick stats ───
-  const monthTasks = days.flatMap(d => tasksByDate[dateKey(d)] || []);
-  const waterCount = monthTasks.filter(t => t.actionType === 'water').length;
-  const mistCount = monthTasks.filter(t => t.actionType === 'mist').length;
-  const fertilizeCount = monthTasks.filter(t => t.actionType === 'fertilize').length;
+  // ─── Quick stats (memoized to avoid recalculating on day selection) ───
+  const { waterCount, mistCount, fertilizeCount } = useMemo(() => {
+    const monthTasks = days.flatMap(d => tasksByDate[dateKey(d)] || []);
+    return {
+      waterCount: monthTasks.filter(t => t.actionType === 'water').length,
+      mistCount: monthTasks.filter(t => t.actionType === 'mist').length,
+      fertilizeCount: monthTasks.filter(t => t.actionType === 'fertilize').length,
+    };
+  }, [days, tasksByDate]);
 
   return (
     <div className="flex flex-col gap-6">

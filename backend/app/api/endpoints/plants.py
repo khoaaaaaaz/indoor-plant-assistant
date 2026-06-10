@@ -83,8 +83,10 @@ def get_user_plants(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-    # Fetch all plants belonging to the current user
-    plants = db.query(Plant).filter(Plant.user_id == current_user.id).all()
+    # Fetch all plants belonging to the current user, ordered by creation date
+    plants = db.query(Plant).filter(
+        Plant.user_id == current_user.id
+    ).order_by(Plant.created_at.asc()).all()
     return plants
 
 @router.get("/{plant_id}", response_model=PlantResponse)
@@ -96,11 +98,10 @@ def get_plant(
     """Get single plant details"""
     plant = db.query(Plant).filter(Plant.id == plant_id).first()
     
-    if not plant:
+    # Return 404 for both not-found and unauthorized.
+    # Never reveal whether a plant ID exists but belongs to another user.
+    if not plant or plant.user_id != current_user.id:
         raise HTTPException(status_code=404, detail="Plant not found")
-    
-    if plant.user_id != current_user.id:
-        raise HTTPException(status_code=403, detail="Not authorized")
     
     return plant
 
@@ -114,11 +115,8 @@ def update_plant(
     """Update plant details"""
     plant = db.query(Plant).filter(Plant.id == plant_id).first()
     
-    if not plant:
+    if not plant or plant.user_id != current_user.id:
         raise HTTPException(status_code=404, detail="Plant not found")
-    
-    if plant.user_id != current_user.id:
-        raise HTTPException(status_code=403, detail="Not authorized")
     
     # Update only provided fields
     if plant_update.name is not None:
@@ -129,6 +127,12 @@ def update_plant(
         plant.next_water_date = plant_update.next_water_date
     if plant_update.image_url is not None:
         plant.image_url = plant_update.image_url
+    if plant_update.sunlight_requirement is not None:
+        plant.sunlight_requirement = plant_update.sunlight_requirement
+    if plant_update.watering_guide is not None:
+        plant.watering_guide = plant_update.watering_guide
+    if plant_update.care_level is not None:
+        plant.care_level = plant_update.care_level
     
     db.commit()
     db.refresh(plant)
@@ -146,14 +150,17 @@ async def refresh_botanical_data(
     Only updates the `botanical_data` JSON blob (static display info).
     Does NOT modify care-related fields (next_water_date, watering_guide,
     sunlight_requirement, care_level) to preserve existing care schedules.
+    
+    Note: Uses async def because fetch_plant_care_info_with_llm_fallback is
+    a coroutine (uses httpx async HTTP client internally). The sync SQLAlchemy
+    calls here are acceptable — they are fast point lookups, and using asyncio.run()
+    from a threadpool risks RuntimeError if an event loop already exists in that thread.
     """
     from app.services.perenual_api_service import get_perenual_service
     
     plant = db.query(Plant).filter(Plant.id == plant_id).first()
-    if not plant:
+    if not plant or plant.user_id != current_user.id:
         raise HTTPException(status_code=404, detail="Plant not found")
-    if plant.user_id != current_user.id:
-        raise HTTPException(status_code=403, detail="Not authorized")
     
     if not plant.species:
         raise HTTPException(status_code=400, detail="Plant has no species to look up")
@@ -177,11 +184,8 @@ def delete_plant(
     """Delete plant (cascades to disease_logs, care_history)"""
     plant = db.query(Plant).filter(Plant.id == plant_id).first()
     
-    if not plant:
+    if not plant or plant.user_id != current_user.id:
         raise HTTPException(status_code=404, detail="Plant not found")
-    
-    if plant.user_id != current_user.id:
-        raise HTTPException(status_code=403, detail="Not authorized")
     
     db.delete(plant)
     db.commit()

@@ -1,5 +1,5 @@
 // src/pages/Dashboard.tsx
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Leaf, Camera, Droplets, Plus, TrendingUp, Bell, X } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -53,16 +53,16 @@ export default function Dashboard() {
     }
   }, [plants, deriveTasks, fetchTodayCompletions]);
 
-  const dailyTasks = tasks.filter((t) => t.isOverdue);
-  const pendingTasks = dailyTasks.filter((t) => !t.isCompleted);
+  const dailyTasks = useMemo(() => tasks.filter((t) => t.isOverdue), [tasks]);
+  const pendingTasks = useMemo(() => dailyTasks.filter((t) => !t.isCompleted), [dailyTasks]);
 
   // ─── Native Web Notifications ───
   const [notificationPermission, setNotificationPermission] = useState<NotificationPermission>(
     notificationService.getPermissionState()
   );
   const [showNotificationBanner, setShowNotificationBanner] = useState<boolean>(
-    notificationService.isSupported() && 
-    notificationService.getPermissionState() === 'default' && 
+    notificationService.isSupported() &&
+    notificationService.getPermissionState() === 'default' &&
     !localStorage.getItem('fm_hide_notification_banner')
   );
 
@@ -72,10 +72,10 @@ export default function Dashboard() {
     if (pendingTasksCount > 0) {
       addNotification({
         type: 'care',
-        titleVi: 'Nhiệm vụ chăm sóc hôm nay!',
-        titleEn: 'Daily Care Due Today!',
-        descVi: `Bạn có ${pendingTasksCount} cây cần được tưới nước hoặc chăm sóc hôm nay.`,
-        descEn: `You have ${pendingTasksCount} plants that need watering or care today.`,
+        titleVi: t('dashboard.careTaskTitle', { lng: 'vi' }),
+        titleEn: t('dashboard.careTaskTitle', { lng: 'en' }),
+        descVi: t('dashboard.careTaskDesc', { count: pendingTasksCount, lng: 'vi' }),
+        descEn: t('dashboard.careTaskDesc', { count: pendingTasksCount, lng: 'en' }),
       });
 
       if (notificationPermission === 'granted') {
@@ -91,9 +91,9 @@ export default function Dashboard() {
   }, [pendingTasksCount, notificationPermission, addNotification, clearNotification]);
 
   const handleEnableNotifications = async () => {
+    setShowNotificationBanner(false);
     const newPermission = await notificationService.requestPermission();
     setNotificationPermission(newPermission);
-    setShowNotificationBanner(false);
   };
 
   const handleDismissBanner = () => {
@@ -106,7 +106,8 @@ export default function Dashboard() {
   //   - Watering: each plant with overdue watering loses points
   //   - Disease: each plant with an active (unresolved) disease loses points
   //   - 100% = all watered on time + zero active diseases
-  const vitalityScore = (() => {
+  // Wrapped in useMemo: only recalculates when `plants` array reference changes.
+  const vitalityScore = useMemo(() => {
     if (plants.length === 0) return 0;
 
     let totalScore = 0;
@@ -138,7 +139,7 @@ export default function Dashboard() {
     });
 
     return Math.round(totalScore / plants.length);
-  })();
+  }, [plants]);
 
   const { t } = useTranslation();
 

@@ -1,4 +1,5 @@
 // src/components/care/CareTaskItem.tsx
+import React from 'react';
 import { Check, Droplets, Sparkles, RotateCcw, Sprout, Lock } from 'lucide-react';
 import type { DerivedCareTask } from '@/store/taskStore';
 
@@ -15,7 +16,9 @@ const actionConfig = {
   rotate:    { icon: RotateCcw, bg: 'bg-amber-100',   text: 'text-amber-600',   label: 'Rotating' },
 };
 
-export function CareTaskItem({ task, onComplete, allowComplete = true }: CareTaskItemProps) {
+// Wrapped in React.memo: prevents re-render when sibling tasks change state
+// but this task's props remain the same.
+export const CareTaskItem = React.memo(function CareTaskItem({ task, onComplete, allowComplete = true }: CareTaskItemProps) {
   const config = actionConfig[task.actionType] || actionConfig.water;
   const Icon = config.icon;
   const canInteract = allowComplete && !task.isCompleted;
@@ -70,4 +73,4 @@ export function CareTaskItem({ task, onComplete, allowComplete = true }: CareTas
       </div>
     </div>
   );
-}
+});

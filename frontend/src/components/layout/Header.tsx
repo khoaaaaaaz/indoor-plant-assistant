@@ -60,6 +60,7 @@ import { useTranslation } from "react-i18next";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { CuteYellowFlowerPlant } from "@/components/icons/cute-plants";
 import { useNotificationStore } from "@/store/notificationStore";
+import { t } from "i18next";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -119,12 +120,10 @@ export function Header() {
                   <div className="flex flex-col items-center justify-center text-center py-6 px-4">
                     <CuteYellowFlowerPlant size={64} className="mb-3 opacity-80" />
                     <h4 className="font-headline text-lg text-primary font-medium mb-1">
-                      {i18n.language === 'vi' ? 'Chưa có thông báo' : 'No notifications yet'}
+                      {t('notifications.empty')}
                     </h4>
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      {i18n.language === 'vi' 
-                        ? 'Bạn đã bắt kịp mọi thứ! Chúng tôi sẽ báo cho bạn khi có thông tin mới.' 
-                        : 'You are all caught up! We will notify you when there is something new.'}
+                      {t('notifications.emptyDesc')}
                     </p>
                   </div>
                 ) : (
@@ -132,36 +131,34 @@ export function Header() {
                     {/* Header Row */}
                     <div className="flex items-center justify-between border-b border-border/50 pb-2 mb-2 px-1">
                       <span className="text-label-sm font-semibold text-primary uppercase tracking-wider">
-                        {i18n.language === 'vi' ? 'Thông báo' : 'Notifications'}
+                        {t('notifications.title')}
                       </span>
-                      <button 
+                      <button
                         onClick={clearAll}
                         className="text-[11px] font-semibold text-muted-foreground hover:text-destructive hover:underline transition-colors flex items-center gap-1"
                       >
                         <Trash2 className="h-3 w-3" />
-                        {i18n.language === 'vi' ? 'Xóa hết' : 'Clear all'}
+                        {t('notifications.clearAll')}
                       </button>
                     </div>
 
                     {/* Notification List Items */}
                     <div className="max-h-72 overflow-y-auto space-y-2 pr-0.5 custom-scrollbar">
                       {notifications.map((n) => (
-                        <div 
-                          key={n.id} 
-                          className={`relative p-3 rounded-xl border border-border/30 flex gap-2.5 group transition-all duration-200 ${
-                            !n.isRead 
-                              ? 'bg-primary/5 border-primary/20 shadow-sm' 
+                        <div
+                          key={n.id}
+                          className={`relative p-3 rounded-xl border border-border/30 flex gap-2.5 group transition-all duration-200 ${!n.isRead
+                              ? 'bg-primary/5 border-primary/20 shadow-sm'
                               : 'bg-muted/20 hover:bg-muted/40'
-                          }`}
+                            }`}
                         >
                           {/* Notification Icon */}
-                          <div className={`p-2 rounded-lg shrink-0 w-9 h-9 flex items-center justify-center ${
-                            n.type === 'care'
+                          <div className={`p-2 rounded-lg shrink-0 w-9 h-9 flex items-center justify-center ${n.type === 'care'
                               ? 'bg-sky-500/10 text-sky-600 dark:bg-sky-400/10 dark:text-sky-400'
                               : n.type === 'weather'
-                              ? 'bg-amber-500/10 text-amber-600 dark:bg-amber-400/10 dark:text-amber-400'
-                              : 'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-400/10 dark:text-emerald-400'
-                          }`}>
+                                ? 'bg-amber-500/10 text-amber-600 dark:bg-amber-400/10 dark:text-amber-400'
+                                : 'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-400/10 dark:text-emerald-400'
+                            }`}>
                             {n.type === 'care' ? (
                               <Droplets className="h-4.5 w-4.5" />
                             ) : n.type === 'weather' ? (

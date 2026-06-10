@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { useAdminStore } from '@/store/adminStore';
 import { useAuth } from '@clerk/react';
+import { useTranslation } from 'react-i18next';
 import { 
   ShieldAlert, 
   Users, 
@@ -31,6 +32,7 @@ import { CuteYellowFlowerPlant } from '@/components/icons/cute-plants';
 
 export default function AdminDashboard() {
   const { isSignedIn } = useAuth();
+  const { t, i18n } = useTranslation();
   const { 
     isAdmin, 
     checkedAccess,
@@ -83,11 +85,11 @@ export default function AdminDashboard() {
           <ShieldAlert className="h-10 w-10" />
         </div>
         <h1 className="font-headline text-headline-xl text-primary mb-3">
-          Access Denied
+          {t('admin.accessDenied')}
         </h1>
-        <p className="text-body-lg text-muted-foreground mb-6">
-          You do not have administrative privileges. If you are a developer, please verify that your email is listed inside the <code className="bg-muted px-1.5 py-0.5 rounded text-sm text-destructive font-mono">ADMIN_EMAILS</code> environment variable inside your backend <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono">.env</code> configuration.
-        </p>
+        <p className="text-body-lg text-muted-foreground mb-6"
+          dangerouslySetInnerHTML={{ __html: t('admin.accessDeniedDesc') }}
+        />
       </div>
     );
   }
@@ -102,14 +104,14 @@ export default function AdminDashboard() {
       <section>
         <div className="flex items-center gap-3 mb-2">
           <Badge variant="secondary" className="gap-1 px-3 py-1 bg-accent text-accent-foreground rounded-full text-label-sm font-semibold">
-            System Administrator
+            {t('admin.badge')}
           </Badge>
         </div>
         <h1 className="font-headline text-headline-xl text-primary">
-          Control Center
+          {t('admin.title')}
         </h1>
         <p className="text-body-lg text-muted-foreground max-w-2xl">
-          System analytics, diagnostic feedback pipelines, and dynamic cache drift auditing.
+          {t('admin.subtitle')}
         </p>
       </section>
 
@@ -133,7 +135,7 @@ export default function AdminDashboard() {
                 {stats.total_users}
               </span>
               <p className="text-label-sm text-muted-foreground uppercase tracking-wider">
-                Total Users
+                {t('admin.totalUsers')}
               </p>
             </div>
 
@@ -147,7 +149,7 @@ export default function AdminDashboard() {
                 {stats.total_plants}
               </span>
               <p className="text-label-sm text-muted-foreground uppercase tracking-wider">
-                Total Plants
+                {t('admin.totalPlants')}
               </p>
             </div>
 
@@ -161,11 +163,11 @@ export default function AdminDashboard() {
                 {stats.total_scans}
               </span>
               <p className="text-label-sm text-muted-foreground uppercase tracking-wider">
-                Total Scans
+                {t('admin.totalScans')}
               </p>
             </div>
 
-            {/* Diseases Gated */}
+            {/* Feedbacks */}
             <div className="bg-card rounded-3xl p-6 border border-border/50 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
               <div className="absolute top-0 right-0 w-32 h-32 bg-accent rounded-full blur-2xl opacity-20 -mr-8 -mt-8 pointer-events-none" />
               <div className="flex justify-between items-start mb-4">
@@ -175,7 +177,7 @@ export default function AdminDashboard() {
                 {stats.total_feedbacks}
               </span>
               <p className="text-label-sm text-muted-foreground uppercase tracking-wider">
-                Feedbacks
+                {t('admin.feedbacks')}
               </p>
             </div>
 
@@ -189,7 +191,7 @@ export default function AdminDashboard() {
                 {Math.round(stats.avg_confidence * 100)}%
               </span>
               <p className="text-label-sm text-muted-foreground uppercase tracking-wider">
-                AI Accuracy
+                {t('admin.aiAccuracy')}
               </p>
             </div>
           </div>
@@ -203,10 +205,10 @@ export default function AdminDashboard() {
           <div className="flex justify-between items-center mb-6">
             <div>
               <h3 className="font-headline text-headline-lg-mobile md:text-xl text-primary font-semibold">
-                Scan Activity Trends
+                {t('admin.scanTrends')}
               </h3>
               <p className="text-body-sm text-muted-foreground">
-                Daily scans recorded in the rolling 14-day window.
+                {t('admin.scanTrendsDesc')}
               </p>
             </div>
             <TrendingUp className="h-5 w-5 text-muted-foreground" />
@@ -218,8 +220,8 @@ export default function AdminDashboard() {
             /* Zero data check */
             <div className="h-[300px] flex flex-col items-center justify-center text-center bg-muted/20 border border-dashed border-border/60 rounded-2xl p-6">
               <CuteYellowFlowerPlant size={64} className="mb-3 opacity-60" />
-              <p className="text-body-md text-muted-foreground font-semibold">No recent scan activity</p>
-              <p className="text-body-sm text-muted-foreground/85">No plants were scanned in the past 14 days.</p>
+              <p className="text-body-md text-muted-foreground font-semibold">{t('admin.noRecentScans')}</p>
+              <p className="text-body-sm text-muted-foreground/85">{t('admin.noRecentScansDesc')}</p>
             </div>
           ) : (
             /* React 19 Container Height Guard: explicit height div around ResponsiveContainer */
@@ -244,7 +246,10 @@ export default function AdminDashboard() {
                     axisLine={false}
                     tickFormatter={(val) => {
                       const d = new Date(val);
-                      return d.toLocaleDateString(undefined, { day: 'numeric', month: 'short' });
+                      return d.toLocaleDateString(
+                        i18n.language === 'vi' ? 'vi-VN' : 'en-US',
+                        { day: 'numeric', month: 'short' }
+                      );
                     }}
                   />
                   <YAxis 
@@ -269,7 +274,7 @@ export default function AdminDashboard() {
                     strokeWidth={2}
                     fillOpacity={1} 
                     fill="url(#colorScans)" 
-                    name="Scans"
+                    name={t('admin.scansLabel')}
                   />
                 </AreaChart>
               </ResponsiveContainer>
@@ -282,10 +287,10 @@ export default function AdminDashboard() {
           <div className="flex justify-between items-center mb-6">
             <div>
               <h3 className="font-headline text-headline-lg-mobile md:text-xl text-primary font-semibold">
-                Disease Breakdown
+                {t('admin.diseaseBreakdown')}
               </h3>
               <p className="text-body-sm text-muted-foreground">
-                Distribution of detected diseases.
+                {t('admin.diseaseBreakdownDesc')}
               </p>
             </div>
             <AlertTriangle className="h-5 w-5 text-muted-foreground" />
@@ -297,8 +302,8 @@ export default function AdminDashboard() {
             /* Zero data check */
             <div className="h-[300px] flex flex-col items-center justify-center text-center bg-muted/20 border border-dashed border-border/60 rounded-2xl p-6">
               <CheckCircle2 className="h-10 w-10 text-secondary mb-3" />
-              <p className="text-body-md text-muted-foreground font-semibold">Ecosystem is healthy</p>
-              <p className="text-body-sm text-muted-foreground/85">No plant diseases have been diagnosed yet.</p>
+              <p className="text-body-md text-muted-foreground font-semibold">{t('admin.ecosystemHealthy')}</p>
+              <p className="text-body-sm text-muted-foreground/85">{t('admin.noDiseases')}</p>
             </div>
           ) : (
             /* React 19 Container Height Guard */
@@ -339,7 +344,7 @@ export default function AdminDashboard() {
                     dataKey="count" 
                     fill="#486643" 
                     radius={[0, 6, 6, 0]}
-                    name="Cases"
+                    name={t('admin.casesLabel')}
                     barSize={12}
                   />
                 </BarChart>
@@ -354,10 +359,10 @@ export default function AdminDashboard() {
         <div className="flex justify-between items-start mb-6">
           <div>
             <h2 className="font-headline text-headline-lg-mobile md:text-headline-lg text-primary">
-              Diagnostic Feedback Pipeline
+              {t('admin.feedbackPipeline')}
             </h2>
             <p className="text-body-md text-muted-foreground">
-              Individual user feedback scores submitted post-treatment. Real-time reviews from garden owners.
+              {t('admin.feedbackPipelineDesc')}
             </p>
           </div>
         </div>
@@ -372,10 +377,10 @@ export default function AdminDashboard() {
           <div className="flex flex-col items-center justify-center text-center p-8 bg-muted/10 border border-dashed border-border/60 rounded-2xl">
             <MessageSquare className="h-12 w-12 text-muted-foreground/60 mb-3" />
             <h3 className="font-headline text-lg text-primary font-medium mb-1">
-              No Feedback Logs
+              {t('admin.noFeedbackLogs')}
             </h3>
             <p className="text-body-sm text-muted-foreground">
-              User evaluations will automatically appear here once plants recover and users submit surveys.
+              {t('admin.noFeedbackLogsDesc')}
             </p>
           </div>
         ) : (
@@ -383,12 +388,12 @@ export default function AdminDashboard() {
             <table className="w-full border-collapse text-left">
               <thead>
                 <tr className="border-b border-border/60 text-label-sm text-muted-foreground font-semibold">
-                  <th className="pb-3 pr-4">Plant & Owner</th>
-                  <th className="pb-3 pr-4">Diagnosed Disease</th>
-                  <th className="pb-3 pr-4">AI Conf.</th>
-                  <th className="pb-3 pr-4">Rating</th>
-                  <th className="pb-3 pr-4">Survey Comments</th>
-                  <th className="pb-3">Logged Date</th>
+                  <th className="pb-3 pr-4">{t('admin.colPlantOwner')}</th>
+                  <th className="pb-3 pr-4">{t('admin.colDisease')}</th>
+                  <th className="pb-3 pr-4">{t('admin.colAiConf')}</th>
+                  <th className="pb-3 pr-4">{t('admin.colRating')}</th>
+                  <th className="pb-3 pr-4">{t('admin.colComments')}</th>
+                  <th className="pb-3">{t('admin.colDate')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/40 text-body-sm">
@@ -428,10 +433,12 @@ export default function AdminDashboard() {
                         </div>
                       </td>
                       <td className="py-3.5 pr-4 max-w-xs text-muted-foreground italic truncate" title={item.feedback_note || ''}>
-                        {item.feedback_note || <span className="opacity-40">No comment submitted</span>}
+                        {item.feedback_note || <span className="opacity-40">{t('admin.noComment')}</span>}
                       </td>
                       <td className="py-3.5 text-muted-foreground font-mono text-xs">
-                        {item.scanned_at ? new Date(item.scanned_at).toLocaleDateString() : '—'}
+                        {item.scanned_at ? new Date(item.scanned_at).toLocaleDateString(
+                          i18n.language === 'vi' ? 'vi-VN' : 'en-US'
+                        ) : '—'}
                       </td>
                     </tr>
                   );
@@ -446,10 +453,10 @@ export default function AdminDashboard() {
       <section className="bg-card rounded-3xl p-6 border border-border/50 shadow-sm">
         <div className="mb-6">
           <h2 className="font-headline text-headline-lg-mobile md:text-headline-lg text-primary">
-            Aggregated Treatment Evaluation
+            {t('admin.aggregatedTitle')}
           </h2>
           <p className="text-body-md text-muted-foreground">
-            Evaluation of botanical treatment protocols sorted by diagnosed disease. Helps developers catch drifting cache rules.
+            {t('admin.aggregatedDesc')}
           </p>
         </div>
 
@@ -461,7 +468,7 @@ export default function AdminDashboard() {
         ) : Object.keys(feedbackSummary.per_disease).length === 0 ? (
           <div className="flex flex-col items-center justify-center text-center p-8 bg-muted/10 border border-dashed border-border/60 rounded-2xl">
             <Activity className="h-10 w-10 text-muted-foreground/60 mb-2" />
-            <p className="text-body-sm text-muted-foreground">No aggregated summaries available yet.</p>
+            <p className="text-body-sm text-muted-foreground">{t('admin.noSummaries')}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -482,20 +489,20 @@ export default function AdminDashboard() {
                         {diseaseName}
                       </h4>
                       <p className="text-xs text-muted-foreground">
-                        Based on {summary.feedback_count} user evaluation(s)
+                        {t('admin.basedOnEvals', { count: summary.feedback_count })}
                       </p>
                     </div>
                     {isFlagged && (
                       <Badge variant="destructive" className="gap-1 animate-pulse">
                         <AlertTriangle className="h-3 w-3" />
-                        Low Satisfaction
+                        {t('admin.lowSatisfaction')}
                       </Badge>
                     )}
                   </div>
 
                   <div className="grid grid-cols-3 gap-3 bg-muted/20 dark:bg-muted/5 rounded-xl p-3 text-center">
                     <div>
-                      <span className="text-xs text-muted-foreground block mb-0.5">Average Score</span>
+                      <span className="text-xs text-muted-foreground block mb-0.5">{t('admin.avgScore')}</span>
                       <span className={`font-headline text-2xl font-semibold ${
                         isFlagged ? 'text-destructive font-bold' : 'text-primary'
                       }`}>
@@ -504,14 +511,14 @@ export default function AdminDashboard() {
                     </div>
 
                     <div>
-                      <span className="text-xs text-muted-foreground block mb-0.5">High Conf. Score</span>
+                      <span className="text-xs text-muted-foreground block mb-0.5">{t('admin.highConfScore')}</span>
                       <span className="font-headline text-xl text-muted-foreground font-semibold block pt-0.5">
                         {summary.high_confidence_avg_score !== null ? `${summary.high_confidence_avg_score}` : '—'}
                       </span>
                     </div>
 
                     <div>
-                      <span className="text-xs text-muted-foreground block mb-0.5">Low Conf. Score</span>
+                      <span className="text-xs text-muted-foreground block mb-0.5">{t('admin.lowConfScore')}</span>
                       <span className="font-headline text-xl text-muted-foreground font-semibold block pt-0.5">
                         {summary.low_confidence_avg_score !== null ? `${summary.low_confidence_avg_score}` : '—'}
                       </span>
@@ -520,7 +527,7 @@ export default function AdminDashboard() {
 
                   {isFlagged && (
                     <p className="text-xs text-destructive font-medium mt-3 leading-relaxed">
-                      {summary.flag} Check that cached static LLM advice is valid by using the audit tab.
+                      {summary.flag} {t('admin.cacheDriftWarning')}
                     </p>
                   )}
                 </div>

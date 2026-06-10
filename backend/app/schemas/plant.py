@@ -23,6 +23,10 @@ class PlantUpdate(BaseModel):
     next_water_date: Optional[date] = None
     notes: Optional[str] = None
     image_url: Optional[str] = None
+    # Care fields — allow editing after creation
+    sunlight_requirement: Optional[str] = None
+    watering_guide: Optional[str] = None
+    care_level: Optional[str] = None
 
 class PlantResponse(PlantBase):
     id: int

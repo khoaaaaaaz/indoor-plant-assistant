@@ -1,4 +1,5 @@
 // src/components/plants/PlantCard.tsx
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Droplets, Sun, Cloud, Leaf } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -36,13 +37,19 @@ function getSunlightIcon(req: string | null) {
   return <Sun className="h-3.5 w-3.5" />;
 }
 
-export function PlantCard({ plant }: PlantCardProps) {
+// Wrapped in React.memo: prevents re-render when parent Dashboard updates
+// but this specific plant's data hasn't changed.
+export const PlantCard = React.memo(function PlantCard({ plant }: PlantCardProps) {
   const watering = getWateringStatus(plant.next_water_date);
 
   return (
     <Link to={`/plants/${plant.id}`} className="block">
-      <Card className="min-w-[260px] max-w-[260px] snap-center overflow-hidden
-        group cursor-pointer hover:shadow-md transition-shadow border-border/50">
+      <Card className={`min-w-[260px] max-w-[260px] snap-center overflow-hidden
+        group cursor-pointer hover:shadow-md transition-all duration-300
+        ${plant.has_active_disease 
+          ? 'border-rose-400/60 shadow-[0_0_15px_rgba(225,29,72,0.1)] dark:border-rose-900/60' 
+          : 'border-border/50'
+        }`}>
 
         {/* Image area */}
         <div className="h-48 overflow-hidden relative bg-muted">
@@ -93,4 +100,4 @@ export function PlantCard({ plant }: PlantCardProps) {
       </Card>
     </Link>
   );
-}
+});

@@ -38,14 +38,10 @@ export function DiseaseLogCard({ log, isLatest = false, onResolved }: DiseaseLog
     : null;
 
   // ─── Calculate Active Treatment Countdown ───
-  const expectedDate = log.expected_resolve_date ? new Date(log.expected_resolve_date) : null;
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  
-  // Reset expectedDate time to start of day for exact comparison
-  if (expectedDate) {
-    expectedDate.setHours(0, 0, 0, 0);
-  }
+  const expectedDate = log.expected_resolve_date
+    ? new Date(new Date(log.expected_resolve_date).setHours(0, 0, 0, 0))
+    : null;
+  const today = new Date(new Date().setHours(0, 0, 0, 0));
 
   const daysRemaining = expectedDate
     ? Math.max(0, Math.ceil((expectedDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)))
@@ -60,21 +56,13 @@ export function DiseaseLogCard({ log, isLatest = false, onResolved }: DiseaseLog
       // 2. Submit rating feedback
       await diseaseLogApi.submitFeedback(log.id, score, note.trim() || undefined);
       
-      toast.success(
-        i18n.language === 'vi' 
-          ? 'Đã báo cáo khỏi bệnh và gửi đánh giá thành công! 🎉'
-          : 'Disease marked as resolved & feedback submitted successfully! 🎉'
-      );
+      toast.success(t('disease.feedbackSuccess'));
       
       setShowFeedbackForm(false);
       onResolved?.(log.id);
     } catch (err) {
       console.error('Failed to submit feedback:', err);
-      toast.error(
-        i18n.language === 'vi'
-          ? 'Không thể gửi đánh giá hiệu quả'
-          : 'Failed to submit treatment feedback'
-      );
+      toast.error(t('disease.feedbackError'));
     } finally {
       setSubmitting(false);
     }
@@ -83,15 +71,15 @@ export function DiseaseLogCard({ log, isLatest = false, onResolved }: DiseaseLog
   const getScoreText = (s: number) => {
     switch (s) {
       case 1: 
-        return i18n.language === 'vi' ? 'Rất tệ (Héo úa/chết)' : 'Very poor (Withered/dead)';
+        return t('disease.score1Desc');
       case 2: 
-        return i18n.language === 'vi' ? 'Kém (Không đỡ)' : 'Poor (No improvement)';
+        return t('disease.score2Desc');
       case 3: 
-        return i18n.language === 'vi' ? 'Tạm ổn (Đỡ một chút)' : 'Okay (Slight recovery)';
+        return t('disease.score3Desc');
       case 4: 
-        return i18n.language === 'vi' ? 'Tốt (Phục hồi nhiều)' : 'Good (Significant recovery)';
+        return t('disease.score4Desc');
       case 5: 
-        return i18n.language === 'vi' ? 'Phục hồi hoàn toàn! 🎉' : 'Fully recovered! 🎉';
+        return t('disease.score5Desc');
       default: 
         return '';
     }
@@ -99,11 +87,11 @@ export function DiseaseLogCard({ log, isLatest = false, onResolved }: DiseaseLog
 
   const scoreEmojis = ['😞', '🙁', '😐', '🙂', '🎉'];
   const scoreLabels = [
-    t('feedback.score1', 'Rất tệ'),
-    t('feedback.score2', 'Kém'),
-    t('feedback.score3', 'Tạm ổn'),
-    t('feedback.score4', 'Tốt'),
-    t('feedback.score5', 'Khỏi hoàn toàn'),
+    t('disease.score1'),
+    t('disease.score2'),
+    t('disease.score3'),
+    t('disease.score4'),
+    t('disease.score5'),
   ];
 
   return (
@@ -190,9 +178,7 @@ export function DiseaseLogCard({ log, isLatest = false, onResolved }: DiseaseLog
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Calendar className="h-3.5 w-3.5" />
                 <span>
-                  {i18n.language === 'vi' 
-                    ? `Đợt điều trị: ${log.treatment_duration_days} ngày` 
-                    : `Treatment duration: ${log.treatment_duration_days} days`}
+                  {t('disease.treatmentDuration', { days: log.treatment_duration_days })}
                 </span>
               </div>
               
@@ -201,13 +187,9 @@ export function DiseaseLogCard({ log, isLatest = false, onResolved }: DiseaseLog
                   <Clock className="h-3.5 w-3.5 text-primary" />
                   <span>
                     {daysRemaining > 0 ? (
-                      i18n.language === 'vi' 
-                        ? `Còn lại ${daysRemaining} ngày điều trị` 
-                        : `${daysRemaining} days remaining in treatment`
+                      t('disease.treatmentRemaining', { days: daysRemaining })
                     ) : (
-                      i18n.language === 'vi'
-                        ? 'Đợt điều trị đã hoàn tất. Vui lòng phản hồi kết quả!'
-                        : 'Treatment period complete. Please rate effectiveness!'
+                      t('disease.treatmentComplete')
                     )}
                   </span>
                 </div>
@@ -231,7 +213,7 @@ export function DiseaseLogCard({ log, isLatest = false, onResolved }: DiseaseLog
           {!isHealthy && !isResolved && showFeedbackForm && (
             <div className="mt-3 p-4 bg-emerald-50/40 border border-emerald-100/50 rounded-2xl flex flex-col gap-3">
               <span className="text-label-sm font-semibold text-primary">
-                {i18n.language === 'vi' ? 'ĐÁNH GIÁ HIỆU QUẢ ĐIỀU TRỊ' : 'RATE TREATMENT EFFECTIVENESS'}
+                {t('disease.rateTitle')}
               </span>
               
               {/* Star / Emoji Selector */}
@@ -260,16 +242,12 @@ export function DiseaseLogCard({ log, isLatest = false, onResolved }: DiseaseLog
               <div className="flex flex-col gap-1">
                 <span className="text-[11px] font-semibold text-muted-foreground flex items-center gap-1">
                   <MessageSquare className="h-3 w-3" />
-                  {i18n.language === 'vi' ? 'Ghi chú điều trị (Tùy chọn)' : 'Treatment notes (Optional)'}
+                  {t('disease.treatmentNotes')}
                 </span>
                 <textarea
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
-                  placeholder={
-                    i18n.language === 'vi'
-                      ? 'Nêu phản hồi cụ thể về cách bạn đã cứu cây của mình...'
-                      : 'Provide details about how you helped your plant recover...'
-                  }
+                  placeholder={t('disease.treatmentNotesPlaceholder')}
                   className="w-full text-xs p-2 rounded-lg border border-border/40 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 bg-card min-h-[60px]"
                 />
               </div>
@@ -283,7 +261,7 @@ export function DiseaseLogCard({ log, isLatest = false, onResolved }: DiseaseLog
                   disabled={submitting}
                   className="rounded-full text-xs text-muted-foreground"
                 >
-                  {i18n.language === 'vi' ? 'Hủy' : 'Cancel'}
+                  {t('disease.cancel')}
                 </Button>
                 <Button
                   size="sm"
@@ -296,7 +274,7 @@ export function DiseaseLogCard({ log, isLatest = false, onResolved }: DiseaseLog
                   ) : (
                     <Check className="h-3 w-3" />
                   )}
-                  {i18n.language === 'vi' ? 'Xác nhận & Gửi' : 'Submit & Save'}
+                  {t('disease.submit')}
                 </Button>
               </div>
             </div>
@@ -336,13 +314,9 @@ export function DiseaseLogCard({ log, isLatest = false, onResolved }: DiseaseLog
             >
               <Check className="h-3.5 w-3.5" />
               {daysRemaining > 0 ? (
-                i18n.language === 'vi' 
-                  ? 'Khỏi bệnh sớm & Gửi đánh giá' 
-                  : 'Resolved early & Give feedback'
+                t('disease.resolveEarly')
               ) : (
-                i18n.language === 'vi'
-                  ? 'Đánh dấu đã khỏi & Gửi đánh giá' 
-                  : 'Mark as Resolved & Rate'
+                t('disease.markResolvedRate')
               )}
             </Button>
           )}

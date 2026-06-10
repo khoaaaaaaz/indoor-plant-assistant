@@ -44,7 +44,6 @@ import type {
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '',
   headers: {
-    'Content-Type': 'application/json',
     // Bypass ngrok's browser interstitial page that strips CORS headers
     'ngrok-skip-browser-warning': 'true',
   },
@@ -177,9 +176,10 @@ export const plantApi = {
 // ─── Scan API ────────────────────────────────────────────
 //
 // These use FormData because they upload images.
-// Note: We DON'T set Content-Type header — the browser
-// automatically sets it to `multipart/form-data` with
-// the correct boundary when you send a FormData object.
+// IMPORTANT: Do NOT set Content-Type manually for FormData requests.
+// When axios receives a FormData body, it automatically sets:
+//   `Content-Type: multipart/form-data; boundary=<generated_boundary>`
+// Setting it manually drops the boundary parameter, breaking server parsing.
 //
 // Backend routes (from scan.py: prefix="/api"):
 //   POST /api/scan/species   → identifySpecies(imageFile)
@@ -191,8 +191,8 @@ export const scanApi = {
     const formData = new FormData();
     formData.append('image', imageFile);
 
+    // No Content-Type header — axios auto-generates multipart/form-data with boundary
     return api.post<SpeciesScanResult>('/api/scan/species', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
       signal: options?.signal,
     });
   },
@@ -217,8 +217,8 @@ export const scanApi = {
       formData.append('longitude', longitude.toString());
     }
 
+    // No Content-Type header — axios auto-generates multipart/form-data with boundary
     return api.post<DiseaseScanResult>('/api/scan/disease', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
       signal: options?.signal,
     });
   },

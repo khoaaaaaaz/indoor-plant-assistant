@@ -39,7 +39,7 @@ function App() {
           <p className="text-body-lg text-muted-foreground max-w-md mx-auto mb-8">
             Your personal AI botanist. Identify species, diagnose diseases, and never forget to water your plants again.
           </p>
-          <SignInButton mode="modal">
+          <SignInButton mode="redirect">
             <button className="bg-primary text-primary-foreground rounded-full py-3 px-8 text-label-sm font-semibold shadow-sm hover:shadow-md hover:bg-primary/90 transition-all active:scale-[0.98]">
               Get Started
             </button>

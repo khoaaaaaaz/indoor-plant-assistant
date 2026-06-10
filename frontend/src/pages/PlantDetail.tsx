@@ -306,79 +306,73 @@ export default function PlantDetail() {
       )}
 
       {/* ─── Image + Tabs Side-by-Side ─── */}
-      <div className="flex flex-col md:flex-row gap-6">
-        {/* ─── Left: Hero Image (sticky on desktop) ─── */}
-        <div className="md:w-[40%] shrink-0 md:sticky md:top-6 md:self-start md:max-h-[80vh] md:overflow-hidden">
-          <div className="bg-card rounded-2xl overflow-hidden shadow-sm
-            h-[280px] md:h-[500px] relative group border border-border/50 bg-black/5 flex items-center justify-center">
-            {selectedPlant.image_url ? (
-              <>
-                {/* Blurred background for padding */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center blur-xl opacity-50 scale-110"
-                  style={{ backgroundImage: `url(${selectedPlant.image_url})` }}
-                />
-                {/* Contained image */}
+      <Tabs defaultValue="overview" className="w-full flex-col min-w-0">
+        {/* Tab header above both columns */}
+        <TabsList className="!w-full grid grid-cols-3 bg-muted/50 rounded-xl h-11 md:max-w-[55%] md:ml-auto">
+          <TabsTrigger value="overview" className="rounded-lg text-label-sm font-semibold">
+            {t('plantDetail.overview')}
+          </TabsTrigger>
+          <TabsTrigger value="care" className="rounded-lg text-label-sm font-semibold">
+            {t('plantDetail.care')}
+          </TabsTrigger>
+          <TabsTrigger
+            value="explore"
+            className="rounded-lg text-label-sm font-semibold"
+            onClick={handleExploreTab}
+          >
+            {t('plantDetail.explore')}
+          </TabsTrigger>
+        </TabsList>
+
+        <div className="flex flex-col md:flex-row gap-6 mt-6">
+          {/* ─── Left: Hero Image (sticky on desktop) ─── */}
+          <div className="md:w-[45%] shrink-0 md:sticky md:top-6 md:self-start md:max-h-[80vh] md:overflow-hidden">
+            <div className="bg-card rounded-3xl overflow-hidden shadow-md
+              aspect-square md:aspect-[4/5] relative group border border-border/50 bg-muted/30">
+              {selectedPlant.image_url ? (
                 <img
                   src={selectedPlant.image_url}
                   alt={selectedPlant.name}
-                  className="w-full h-full object-contain relative z-10 group-hover:scale-105 transition-transform duration-700 drop-shadow-md"
+                  className="w-full h-full object-cover relative z-10 group-hover:scale-105 transition-transform duration-700"
                 />
-              </>
-            ) : (
-              <div className="w-full h-full bg-gradient-to-br from-accent/60 via-primary/20
-            to-secondary/30 flex items-center justify-center
-            group-hover:scale-105 transition-transform duration-700">
-                <Leaf className="h-20 w-20 text-primary/20" />
-              </div>
-            )}
-          </div>
-          {/* Info bar below image */}
-          <div className="flex justify-between items-center px-1 pt-3">
-            <div className="text-sm text-muted-foreground">
-              <span className="text-label-sm text-muted-foreground/70">{t('plant.acquired')}</span>{' '}
-              <span className="font-medium text-foreground">{acquiredDate}</span>
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-accent/60 via-primary/20
+              to-secondary/30 flex items-center justify-center
+              group-hover:scale-105 transition-transform duration-700">
+                  <Leaf className="h-20 w-20 text-primary/20" />
+                </div>
+              )}
             </div>
-            <span className="text-label-sm font-semibold text-primary bg-accent/30 px-3 py-1 rounded-full">
-              {getPlantAge()}
-            </span>
+            {/* Info bar below image */}
+            <div className="flex justify-between items-center px-1 pt-3">
+              <div className="text-sm text-muted-foreground">
+                <span className="text-label-sm text-muted-foreground/70">{t('plant.acquired')}</span>{' '}
+                <span className="font-medium text-foreground">{acquiredDate}</span>
+              </div>
+              <span className="text-label-sm font-semibold text-primary bg-accent/30 px-3 py-1 rounded-full">
+                {getPlantAge()}
+              </span>
+            </div>
           </div>
-        </div>
 
-        {/* ─── Right: Tabs ─── */}
-        <div className="md:flex-1 min-w-0">
-          <Tabs defaultValue="overview" className="w-full flex-col min-w-0">
-            <TabsList className="!w-full grid grid-cols-3 bg-muted/50 rounded-xl h-11">
-              <TabsTrigger value="overview" className="rounded-lg text-label-sm font-semibold">
-                {t('plantDetail.overview')}
-              </TabsTrigger>
-              <TabsTrigger value="care" className="rounded-lg text-label-sm font-semibold">
-                {t('plantDetail.care')}
-              </TabsTrigger>
-              <TabsTrigger
-                value="explore"
-                className="rounded-lg text-label-sm font-semibold"
-                onClick={handleExploreTab}
-              >
-                {t('plantDetail.explore')}
-              </TabsTrigger>
-            </TabsList>
+          {/* ─── Right: Tab Content ─── */}
+          <div className="md:flex-1 min-w-0">
 
             {/* ── Tab 1: Overview ── */}
-            <TabsContent value="overview" className="mt-6 space-y-6">
+            <TabsContent value="overview" className="mt-0 space-y-6">
               {/* Perks */}
               {perks.length > 0 && (
-                <div className="bg-card rounded-xl p-5 shadow-sm border border-border/50
+                <div className="bg-card rounded-2xl p-6 shadow-sm border border-border/50
               hover:shadow-md transition-all duration-200">
-                  <h3 className="text-label-sm text-muted-foreground mb-3 font-semibold uppercase tracking-wider">
+                  <h3 className="text-label-sm text-muted-foreground mb-4 font-semibold uppercase tracking-wider">
                     {t('plantDetail.perks')}
                   </h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-3">
                     {perks.map((p) => (
-                      <Badge key={p.label} variant="outline"
-                        className="gap-1.5 py-1.5 px-3 text-[13px] bg-accent/30 border-border/50">
-                        <span>{p.icon}</span> {p.label}
-                      </Badge>
+                      <div key={p.label} className="flex items-center gap-2 py-2 px-4 rounded-xl bg-primary/5 border border-primary/10 text-primary hover:bg-primary/10 transition-colors">
+                        <span className="text-lg">{p.icon}</span> 
+                        <span className="text-body-md font-semibold">{p.label}</span>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -431,12 +425,12 @@ export default function PlantDetail() {
 
               {/* Description */}
               {bd?.description && (
-                <div className="bg-card rounded-xl p-5 shadow-sm border border-border/50
+                <div className="bg-card rounded-2xl p-6 shadow-sm border border-border/50
               hover:shadow-md transition-all duration-200">
-                  <h3 className="text-label-sm text-muted-foreground mb-2 font-semibold uppercase tracking-wider">
+                  <h3 className="text-label-sm text-muted-foreground mb-3 font-semibold uppercase tracking-wider">
                     {t('plantDetail.description')}
                   </h3>
-                  <p className="text-body-md text-foreground leading-relaxed">{translateBotanical(bd.description, t)}</p>
+                  <p className="text-[15px] text-foreground leading-relaxed font-medium">{translateBotanical(bd.description, t)}</p>
                 </div>
               )}
 
@@ -469,7 +463,7 @@ export default function PlantDetail() {
             </TabsContent>
 
             {/* ── Tab 2: Care ── */}
-            <TabsContent value="care" className="mt-6">
+            <TabsContent value="care" className="mt-0">
               <div className="grid grid-cols-1 gap-4">
                 {/* Watering */}
                 <CareCard icon={<Droplets className="h-5 w-5 text-blue-600" />}
@@ -615,7 +609,7 @@ export default function PlantDetail() {
             </TabsContent>
 
             {/* ── Tab 3: Explore ── */}
-            <TabsContent value="explore" className="mt-6 space-y-6">
+            <TabsContent value="explore" className="mt-0 space-y-6">
               {exploreLoading ? (
                 <div className="space-y-4">
                   <Skeleton className="h-24 w-full rounded-xl" />
@@ -670,9 +664,9 @@ export default function PlantDetail() {
                 </div>
               )}
             </TabsContent>
-          </Tabs>
+          </div>
         </div>
-      </div>
+      </Tabs>
 
       {/* ─── Always-visible: Care History ─── */}
       <div className="bg-card rounded-xl p-6 md:p-8 shadow-sm border border-border/50">

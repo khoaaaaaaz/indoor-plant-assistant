@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { scanApi } from '@/services/api';
 import { PhotoTips, HEALTH_CHECK_TIPS } from './PhotoTips';
+import { CameraFrameGuide } from './CameraFrameGuide';
 import type { DiseaseScanResult, DiseaseLog } from '@/types';
 import { useTranslation } from 'react-i18next';
 import { translateDisease } from '@/lib/translate';
@@ -37,7 +38,8 @@ export function HealthCheckDialog({
   const [error, setError] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isCompressing, setIsCompressing] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
+  const galleryInputRef = useRef<HTMLInputElement>(null);
   const { t, i18n } = useTranslation();
 
   const { prepareImage, createSignal, cancel } = useImageCapture();
@@ -53,13 +55,13 @@ export function HealthCheckDialog({
     return () => { if (previewUrl) URL.revokeObjectURL(previewUrl); };
   }, [previewUrl]);
 
-  const loadingSteps = [
-    'Uploading scan...',
-    'Running pathology analysis...',
-    'Checking local weather conditions...',
-    'Consulting treatment database...',
-    'Generating care recommendations...'
-  ];
+  const loadingSteps = useMemo(() => [
+    t('scan.healthUploading', 'Uploading scan...'),
+    t('scan.healthAnalyzing', 'Running pathology analysis...'),
+    t('scan.healthWeather', 'Checking local weather conditions...'),
+    t('scan.healthTreatment', 'Consulting treatment database...'),
+    t('scan.healthRecommendations', 'Generating care recommendations...'),
+  ], [t]);
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
 
   useEffect(() => {
@@ -71,7 +73,7 @@ export function HealthCheckDialog({
       }, 1800);
     }
     return () => clearInterval(interval);
-  }, [step]);
+  }, [step, loadingSteps.length]);
 
   // ── File validation + preview ──
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -234,11 +236,7 @@ export function HealthCheckDialog({
                     variant="outline"
                     className="flex-1 h-24 flex-col gap-2 rounded-xl"
                     onClick={() => {
-                      if (fileInputRef.current) {
-                        fileInputRef.current.accept = 'image/jpeg,image/png,image/webp';
-                        fileInputRef.current.capture = 'environment';
-                        fileInputRef.current.click();
-                      }
+                      cameraInputRef.current?.click();
                     }}
                   >
                     <Camera className="h-6 w-6 text-primary" />
@@ -248,11 +246,7 @@ export function HealthCheckDialog({
                     variant="outline"
                     className="flex-1 h-24 flex-col gap-2 rounded-xl"
                     onClick={() => {
-                      if (fileInputRef.current) {
-                        fileInputRef.current.removeAttribute('capture');
-                        fileInputRef.current.accept = 'image/jpeg,image/png,image/webp';
-                        fileInputRef.current.click();
-                      }
+                      galleryInputRef.current?.click();
                     }}
                   >
                     <Upload className="h-6 w-6 text-primary" />
@@ -260,7 +254,16 @@ export function HealthCheckDialog({
                   </Button>
                 </div>
                 <input
-                  ref={fileInputRef}
+                  ref={cameraInputRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  capture="environment"
+                  multiple={false}
+                  className="hidden"
+                  onChange={handleInputChange}
+                />
+                <input
+                  ref={galleryInputRef}
                   type="file"
                   accept="image/jpeg,image/png,image/webp"
                   multiple={false}
@@ -275,17 +278,20 @@ export function HealthCheckDialog({
         {/* ── Step 2: Preview ── */}
         {step === 'preview' && previewUrl && (
           <div className="flex flex-col gap-4 py-4">
-            {/* Thumbnail — max-h-48 prevents tall portrait images from dominating mobile */}
-            <div className="rounded-xl overflow-hidden border border-border/50 bg-muted flex items-center justify-center">
+            {/* Thumbnail with CameraFrameGuide overlay */}
+            <div className="relative aspect-[4/3] w-full max-w-sm mx-auto rounded-xl overflow-hidden border border-border/50 bg-muted flex items-center justify-center shadow-inner">
               <img
                 src={previewUrl}
                 alt="Preview"
-                className="max-h-48 w-full object-contain"
+                className="h-full w-full object-cover"
               />
+              <div className="absolute inset-0 pointer-events-none">
+                <CameraFrameGuide />
+              </div>
             </div>
 
             {/* Tips reminder */}
-            <PhotoTips tips={HEALTH_CHECK_TIPS} />
+            <PhotoTips tips={HEALTH_CHECK_TIPS} compact />
 
             {/* Actions */}
             <div className="flex gap-3">
@@ -313,7 +319,7 @@ export function HealthCheckDialog({
           <div className="flex flex-col items-center py-12 gap-4">
             <Loader2 className="h-12 w-12 text-primary animate-spin" />
             <p className="text-body-md text-muted-foreground animate-pulse text-center">
-              {isCompressing ? 'Compressing leaf photo...' : loadingSteps[loadingStepIndex]}
+              {isCompressing ? t('scan.compressing', 'Compressing leaf photo...') : loadingSteps[loadingStepIndex]}
             </p>
           </div>
         )}

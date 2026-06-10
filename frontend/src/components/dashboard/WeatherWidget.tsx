@@ -79,10 +79,10 @@ export function WeatherWidget() {
       // Trigger in-app notification
       addNotification({
         type: 'weather',
-        titleVi: 'Khuyến nghị thời tiết thông minh',
-        titleEn: 'Smart Weather Recommendation',
-        descVi: `Độ ẩm/đất ẩm cao. Hãy cân nhắc hoãn việc tưới nước cho ${plantsDueToday.length} cây hôm nay.`,
-        descEn: `High humidity/moisture detected. Consider skipping your watering task for ${plantsDueToday.length} plants today.`,
+        titleVi: t('weather.smartTitle', { lng: 'vi' }),
+        titleEn: t('weather.smartTitle', { lng: 'en' }),
+        descVi: t('weather.smartDesc', { count: plantsDueToday.length, lng: 'vi' }),
+        descEn: t('weather.smartDesc', { count: plantsDueToday.length, lng: 'en' }),
       });
 
       // Trigger PWA Native Browser Notification

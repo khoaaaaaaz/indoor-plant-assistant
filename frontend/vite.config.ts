@@ -63,8 +63,23 @@ export default defineConfig(({ mode }) => {
       host: "0.0.0.0",
       port: 5173,
       allowedHosts: true, // Allow all secure tunnels (like ngrok)
+      hmr: env.VITE_HMR_PORT
+        ? {
+            clientPort: parseInt(env.VITE_HMR_PORT),
+            protocol: env.VITE_HMR_PROTOCOL || undefined,
+          }
+        : {
+            clientPort: 443,
+            protocol: 'wss',
+          },
       watch: {
+        // Docker on Windows: use polling to avoid inotify limits (ENOMEM).
+        // Without `ignored`, Vite scans the entire /app volume (including
+        // node_modules) on startup before polling begins, exhausting kernel
+        // memory and crashing the container (errno -12 / ENOMEM).
         usePolling: true,
+        interval: 1000,
+        ignored: ['**/node_modules/**', '**/.git/**'],
       },
       proxy: {
         "/api": {

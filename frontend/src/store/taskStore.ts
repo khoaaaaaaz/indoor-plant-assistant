@@ -35,6 +35,7 @@ export type DiseaseAdjustmentsMap = Record<number, CareAdjustments | null>;
 interface TaskState {
   tasks: DerivedCareTask[];
   completedToday: Record<string, boolean>; // taskId → true (session-only)
+  lastFetchedDateStr: string | null;
   loading: boolean;
 
   deriveTasks: (plants: Plant[], diseaseAdjustments?: DiseaseAdjustmentsMap) => void;
@@ -57,6 +58,7 @@ const daysBetween = (a: Date, b: Date) =>
 export const useTaskStore = create<TaskState>((set, get) => ({
   tasks: [],
   completedToday: {},
+  lastFetchedDateStr: null,
   loading: false,
 
   // ─── Derive Tasks from Plants ──────────────────────────
@@ -185,6 +187,9 @@ export const useTaskStore = create<TaskState>((set, get) => ({
     const today = new Date();
     const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
+    // Tối ưu hóa: Tránh gọi lại API nếu đã lấy dữ liệu history của hôm nay rồi
+    if (get().lastFetchedDateStr === todayStr) return;
+
     try {
       // Fetch care history for all plants concurrently
       const results = await Promise.all(
@@ -217,6 +222,7 @@ export const useTaskStore = create<TaskState>((set, get) => ({
       // Update tasks with restored completion state
       set((state) => ({
         completedToday: completed,
+        lastFetchedDateStr: todayStr,
         tasks: state.tasks.map((t) =>
           completed[t.id] ? { ...t, isCompleted: true } : t
         ),
@@ -247,9 +253,14 @@ export const useTaskStore = create<TaskState>((set, get) => ({
         notes: `Completed via care checklist`,
         task_due_date: task.dueDate,
       });
-      // Sync the new next_water_date (only matters for water tasks)
-      const { usePlantStore } = await import('./plantStore');
-      usePlantStore.getState().fetchPlants();
+      // Sync the new next_water_date for the watered plant.
+      // We call fetchPlant (single plant) instead of fetchPlants (all plants)
+      // because fetchPlants has a cache guard (`if plants.length > 0 return`)
+      // that will always skip the API call when the store already has data.
+      if (task.actionType === 'water') {
+        const { usePlantStore } = await import('./plantStore');
+        await usePlantStore.getState().fetchPlant(task.plantId);
+      }
     } catch (error) {
       // Revert on failure
       console.error('Failed to log care action:', error);
@@ -263,5 +274,5 @@ export const useTaskStore = create<TaskState>((set, get) => ({
     }
   },
 
-  resetTasks: () => set({ tasks: [], completedToday: {}, loading: false }),
+  resetTasks: () => set({ tasks: [], completedToday: {}, lastFetchedDateStr: null, loading: false }),
 }));

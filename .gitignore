@@ -78,6 +78,7 @@ part_2b2_scan_deep_dive.md
 part_2c1_services_ai_weather.md
 part_2c2_perenual_llm_admin.md
 ai_model_plan.md
+part_3*.md
 
 # ─── Walkthrough / Internal Dev Notes ──────
 walkthrough/
@@ -87,6 +88,7 @@ Bao_Cao_Tot_Nghiep/
 # ─── Duplicate/Temp Folders ────────────────
 backend/backend/
 backend/venv/
+backend/uploads/
 
 # ─── Gemini Antigravity workspace ──────────
 .gemini/

@@ -21,7 +21,7 @@ from app.core.database import get_db
 from app.models.user import User
 from app.models.plant import Plant
 from app.models.disease_log import DiseaseLog
-from app.api.dependencies import require_admin
+from app.api.dependencies import require_admin, get_current_user
 from app.services.perenual_api_service import get_perenual_service, _SPECIES_CACHE
 from app.services.llm_service import get_disease_recommendation, _DISEASE_CACHE
 
@@ -31,14 +31,20 @@ router = APIRouter(prefix="/api/admin", tags=["Admin"])
 
 @router.get("/me")
 async def get_admin_status(
-    current_user: User = Depends(require_admin)
+    current_user: User = Depends(get_current_user)
 ):
     """
     Lightweight check to verify if the logged-in user is a whitelisted admin.
-    Returns 200 OK if admin, 403 Forbidden otherwise.
+    Returns 200 OK with is_admin=True/False to avoid console 403 errors.
     """
+    import os
+    admin_emails_str = os.getenv("ADMIN_EMAILS", "")
+    admin_emails = {email.strip().lower() for email in admin_emails_str.split(",") if email.strip()}
+    
+    is_admin = (current_user.email and current_user.email.lower() in admin_emails) or (current_user.role == "admin")
+    
     return {
-        "is_admin": True,
+        "is_admin": is_admin,
         "email": current_user.email
     }
 

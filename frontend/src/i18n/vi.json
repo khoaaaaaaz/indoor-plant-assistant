@@ -14,7 +14,9 @@
     "needCare": "Cần chăm sóc hôm nay",
     "dailyTasks": "Việc chăm sóc hàng ngày",
     "dailyCareTasks": "Việc chăm sóc hàng ngày",
-    "collection": "Bộ sưu tập cây của bạn"
+    "collection": "Bộ sưu tập cây của bạn",
+    "careTaskTitle": "Nhiệm vụ chăm sóc hôm nay!",
+    "careTaskDesc": "Bạn có {{count}} cây cần được tưới nước hoặc chăm sóc hôm nay."
   },
   "weather": {
     "title": "Thời tiết hôm nay",
@@ -34,7 +36,9 @@
     "deferDescription": "Thời tiết ẩm ướt — {{count}} cây cần tưới có thể bỏ qua hôm nay.",
     "deferAction": "Vâng, bỏ qua",
     "deferSuccess": "Xong! Đã lùi lịch {{count}} cây.",
-    "deferError": "Không thể cập nhật lịch."
+    "deferError": "Không thể cập nhật lịch.",
+    "smartTitle": "Khuyến nghị thời tiết thông minh",
+    "smartDesc": "Độ ẩm/đất ẩm cao. Hãy cân nhắc hoãn việc tưới nước cho {{count}} cây hôm nay."
   },
   "care": {
     "schedule": "Lịch chăm sóc",
@@ -151,9 +155,35 @@
     "photoTip3": "Giữ nền ảnh đơn giản",
     "photoTip4": "Chụp rõ vùng bị ảnh hưởng",
     "photoTip5": "Chỉ chụp 1 ảnh mỗi lần quét",
+    "photoTipSpecies": "Chụp toàn bộ cây hoặc các cành chính",
+    "photoTipNoMulti": "Tránh chụp nhiều loại cây trong một ảnh",
+    "tipDo1": "Chụp gần lá/thân",
+    "tipDont1": "Tránh ngược sáng",
+    "tipDont2": "Không chụp mờ",
     "fileTooLarge": "Ảnh quá lớn (tối đa 10MB). Vui lòng chọn ảnh nhỏ hơn.",
     "retry": "Thử lại",
-    "confidence": "độ tin cậy"
+    "confidence": "độ tin cậy",
+    "uploading": "Đang tải ảnh lên...",
+    "identifying": "Đang nhận diện loài...",
+    "fetchingCare": "Đang tải dữ liệu chăm sóc...",
+    "almostReady": "Gần xong rồi...",
+    "plantAdded": "Đã thêm cây vào vườn của bạn! 🌿",
+    "addFailed": "Không thể thêm cây. Vui lòng thử lại.",
+    "healthUploading": "Đang tải ảnh quét lên...",
+    "healthAnalyzing": "Đang phân tích bệnh học...",
+    "healthWeather": "Đang kiểm tra thời tiết địa phương...",
+    "healthTreatment": "Đang đối chiếu cơ sở dữ liệu điều trị...",
+    "healthRecommendations": "Đang tạo khuyến nghị chăm sóc...",
+    "compressing": "Đang nén ảnh lá..."
+  },
+  "nav": {
+    "myGarden": "Vườn của tôi",
+    "care": "Chăm sóc",
+    "settings": "Cài đặt",
+    "adminControl": "Quản trị viên",
+    "scan": "Quét",
+    "scanPlant": "Quét cây",
+    "gardenerRole": "Chăm sóc cây cảnh"
   },
   "disease": {
     "activeAlert": "Bệnh đang hoạt động",
@@ -161,13 +191,45 @@
     "resolved": "Đã khỏi",
     "resolvedSuccess": "Đã đánh dấu bệnh khỏi! 🎉 Lịch chăm sóc đã được khôi phục.",
     "resolveFailed": "Không thể đánh dấu bệnh khỏi",
-    "markResolved": "Đánh dấu đã khỏi"
+    "markResolved": "Đánh dấu đã khỏi",
+    "feedbackSuccess": "Đã báo cáo khỏi bệnh và gửi đánh giá thành công! 🎉",
+    "feedbackError": "Không thể gửi đánh giá hiệu quả",
+    "score1": "Rất tệ",
+    "score1Desc": "Rất tệ (Héo úa/chết)",
+    "score2": "Kém",
+    "score2Desc": "Kém (Không đỡ)",
+    "score3": "Tạm ổn",
+    "score3Desc": "Tạm ổn (Đỡ một chút)",
+    "score4": "Tốt",
+    "score4Desc": "Tốt (Phục hồi nhiều)",
+    "score5": "Khỏi hoàn toàn",
+    "score5Desc": "Phục hồi hoàn toàn! 🎉",
+    "treatmentDuration": "Đợt điều trị: {{days}} ngày",
+    "treatmentRemaining": "Còn lại {{days}} ngày điều trị",
+    "treatmentComplete": "Đợt điều trị đã hoàn tất. Vui lòng phản hồi kết quả!",
+    "rateTitle": "ĐÁNH GIÁ HIỆU QUẢ ĐIỀU TRỊ",
+    "treatmentNotes": "Ghi chú điều trị (Tùy chọn)",
+    "treatmentNotesPlaceholder": "Nêu phản hồi cụ thể về cách bạn đã cứu cây của mình...",
+    "cancel": "Hủy",
+    "submit": "Xác nhận & Gửi",
+    "resolveEarly": "Khỏi bệnh sớm & Gửi đánh giá",
+    "markResolvedRate": "Đánh dấu đã khỏi & Gửi đánh giá"
   },
   "common": {
     "loading": "Đang tải...",
     "error": "Đã xảy ra lỗi",
     "backToDashboard": "Quay lại trang chính",
     "plants": "cây"
+  },
+
+  "notifications": {
+    "title": "Thông báo",
+    "empty": "Chưa có thông báo",
+    "emptyDesc": "Bạn đã bắt kịp mọi thứ! Chúng tôi sẽ báo cho bạn khi có thông tin mới.",
+    "clearAll": "Xóa hết",
+    "enableTitle": "Bật nhắc nhở chăm sóc",
+    "enableDesc": "Đừng quên tưới nước hoặc phun sương! Bật thông báo trình duyệt để nhận nhắc nhở chăm sóc và thời tiết trực tiếp trên thiết bị của bạn.",
+    "enableButton": "Bật nhắc nhở"
   },
 
   "species": {
@@ -285,5 +347,58 @@
     "Biennial": "Hai năm",
     "Slow": "Chậm",
     "Fast": "Nhanh"
+  },
+
+  "admin": {
+    "accessDenied": "Truy cập bị từ chối",
+    "accessDeniedDesc": "Bạn không có quyền quản trị. Nếu bạn là nhà phát triển, vui lòng xác nhận email của bạn có trong biến môi trường <code>ADMIN_EMAILS</code> trong tệp <code>.env</code> của backend.",
+    "badge": "Quản trị viên hệ thống",
+    "title": "Trung tâm điều khiển",
+    "subtitle": "Phân tích hệ thống, quy trình phản hồi chẩn đoán và kiểm tra lệch bộ nhớ đệm.",
+    "totalUsers": "Tổng người dùng",
+    "totalPlants": "Tổng số cây",
+    "totalScans": "Tổng lượt quét",
+    "feedbacks": "Phản hồi",
+    "aiAccuracy": "Độ chính xác AI",
+    "scanTrends": "Xu hướng quét",
+    "scanTrendsDesc": "Lượt quét hàng ngày trong cửa sổ 14 ngày gần nhất.",
+    "noRecentScans": "Không có hoạt động quét gần đây",
+    "noRecentScansDesc": "Không có cây nào được quét trong 14 ngày qua.",
+    "scansLabel": "Lượt quét",
+    "diseaseBreakdown": "Phân bổ bệnh",
+    "diseaseBreakdownDesc": "Phân bổ các loại bệnh được phát hiện.",
+    "ecosystemHealthy": "Hệ sinh thái khỏe mạnh",
+    "noDiseases": "Chưa có bệnh nào được chẩn đoán.",
+    "casesLabel": "Số ca",
+    "feedbackPipeline": "Kênh phản hồi chẩn đoán",
+    "feedbackPipelineDesc": "Điểm đánh giá của người dùng sau điều trị. Đánh giá trực tiếp từ chủ vườn.",
+    "noFeedbackLogs": "Chưa có phản hồi",
+    "noFeedbackLogsDesc": "Đánh giá của người dùng sẽ tự động xuất hiện sau khi cây hồi phục và người dùng gửi khảo sát.",
+    "colPlantOwner": "Cây & Chủ sở hữu",
+    "colDisease": "Bệnh chẩn đoán",
+    "colAiConf": "Độ tin cậy AI",
+    "colRating": "Đánh giá",
+    "colComments": "Nhận xét khảo sát",
+    "colDate": "Ngày ghi nhận",
+    "noComment": "Không có nhận xét",
+    "aggregatedTitle": "Đánh giá tổng hợp hiệu quả điều trị",
+    "aggregatedDesc": "Đánh giá quy trình điều trị thực vật theo từng loại bệnh. Giúp phát hiện lệch bộ nhớ đệm.",
+    "noSummaries": "Chưa có tổng hợp đánh giá.",
+    "basedOnEvals": "Dựa trên {{count}} đánh giá",
+    "lowSatisfaction": "Mức hài lòng thấp",
+    "avgScore": "Điểm trung bình",
+    "highConfScore": "Điểm (tin cậy cao)",
+    "lowConfScore": "Điểm (tin cậy thấp)",
+    "cacheDriftWarning": "Kiểm tra tính hợp lệ của lời khuyên LLM trong bộ nhớ đệm bằng tab kiểm tra."
+  },
+  "notifications": {
+    "welcomeTitle": "🔔 Đã bật nhắc nhở FloraMentor!",
+    "welcomeBody": "Thông báo nhắc nhở chăm sóc và cảnh báo thời tiết thông minh đã được kích hoạt.",
+    "careTitle": "🌱 Nhiệm vụ chăm sóc hôm nay!",
+    "careBodySingular": "Bạn có 1 cây cần chăm sóc hôm nay. Nhấp để mở FloraMentor.",
+    "careBodyPlural": "Bạn có {{count}} cây cần chăm sóc hôm nay. Nhấp để mở FloraMentor.",
+    "weatherTitle": "🌦️ Khuyến nghị thời tiết thông minh",
+    "weatherBodySingular": "Phát hiện độ ẩm cao. Cân nhắc bỏ qua nhiệm vụ tưới nước hôm nay.",
+    "weatherBodyPlural": "Phát hiện độ ẩm cao. Cân nhắc bỏ qua {{count}} nhiệm vụ tưới nước hôm nay."
   }
 }

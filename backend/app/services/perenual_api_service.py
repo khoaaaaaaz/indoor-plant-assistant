@@ -879,7 +879,7 @@ Respond ONLY with the JSON object. No other text."""
                             "maxOutputTokens": 600,
                         },
                     },
-                    timeout=10.0,
+                    timeout=60.0,
                 )
                 response.raise_for_status()
                 data = response.json()

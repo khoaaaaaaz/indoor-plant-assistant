@@ -6,12 +6,14 @@ import { Button } from '@/components/ui/button';
 import { scanApi } from '@/services/api';
 import { ScanResultCard } from './ScanResultCard';
 import { PhotoTips, SPECIES_SCAN_TIPS } from './PhotoTips';
+import { CameraFrameGuide } from './CameraFrameGuide';
 import { toast } from 'sonner';
 import type { SpeciesScanResult } from '@/types';
 import { useTranslation } from 'react-i18next';
 import { useImageCapture } from '@/hooks/useImageCapture';
 
 const MAX_FILE_SIZE_MB = 10;
+const LOADING_STEPS_KEYS = ['scan.uploading', 'scan.identifying', 'scan.fetchingCare', 'scan.almostReady'];
 
 interface ScanDialogProps {
   open: boolean;
@@ -24,7 +26,8 @@ export function ScanDialog({ open, onOpenChange }: ScanDialogProps) {
   const [result, setResult] = useState<SpeciesScanResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
+  const galleryInputRef = useRef<HTMLInputElement>(null);
   const { t } = useTranslation();
   const { prepareImage, createSignal, cancel } = useImageCapture();
 
@@ -38,12 +41,7 @@ export function ScanDialog({ open, onOpenChange }: ScanDialogProps) {
     return () => { if (previewUrl) URL.revokeObjectURL(previewUrl); };
   }, [previewUrl]);
 
-  const loadingSteps = [
-    'Uploading image...',
-    'Identifying species...',
-    'Fetching care data...',
-    'Almost ready...',
-  ];
+  const loadingSteps = useMemo(() => LOADING_STEPS_KEYS.map(key => t(key)), [t]);
 
   useEffect(() => {
     if (step !== 'scanning') return;
@@ -51,7 +49,7 @@ export function ScanDialog({ open, onOpenChange }: ScanDialogProps) {
       setStepIndex((i) => Math.min(i + 1, loadingSteps.length - 1));
     }, 1800);
     return () => clearInterval(interval);
-  }, [step]);
+  }, [step, loadingSteps.length]);
 
   // ── File validation + preview ──
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -141,11 +139,7 @@ export function ScanDialog({ open, onOpenChange }: ScanDialogProps) {
                 variant="outline"
                 className="flex-1 h-24 flex-col gap-2 rounded-xl"
                 onClick={() => {
-                  if (fileInputRef.current) {
-                    fileInputRef.current.accept = 'image/jpeg,image/png,image/webp';
-                    fileInputRef.current.capture = 'environment';
-                    fileInputRef.current.click();
-                  }
+                  cameraInputRef.current?.click();
                 }}
               >
                 <Camera className="h-6 w-6 text-primary" />
@@ -155,11 +149,7 @@ export function ScanDialog({ open, onOpenChange }: ScanDialogProps) {
                 variant="outline"
                 className="flex-1 h-24 flex-col gap-2 rounded-xl"
                 onClick={() => {
-                  if (fileInputRef.current) {
-                    fileInputRef.current.removeAttribute('capture');
-                    fileInputRef.current.accept = 'image/jpeg,image/png,image/webp';
-                    fileInputRef.current.click();
-                  }
+                  galleryInputRef.current?.click();
                 }}
               >
                 <Upload className="h-6 w-6 text-primary" />
@@ -167,7 +157,16 @@ export function ScanDialog({ open, onOpenChange }: ScanDialogProps) {
               </Button>
             </div>
             <input
-              ref={fileInputRef}
+              ref={cameraInputRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              capture="environment"
+              multiple={false}
+              className="hidden"
+              onChange={handleInputChange}
+            />
+            <input
+              ref={galleryInputRef}
               type="file"
               accept="image/jpeg,image/png,image/webp"
               multiple={false}
@@ -180,17 +179,20 @@ export function ScanDialog({ open, onOpenChange }: ScanDialogProps) {
         {/* ── Step 2: Preview ── */}
         {step === 'preview' && previewUrl && (
           <div className="flex flex-col gap-4 py-4">
-            {/* Thumbnail — max-h-48 prevents tall portrait images from dominating mobile */}
-            <div className="rounded-xl overflow-hidden border border-border/50 bg-muted flex items-center justify-center">
+            {/* Thumbnail with CameraFrameGuide overlay */}
+            <div className="relative aspect-[4/3] w-full max-w-sm mx-auto rounded-xl overflow-hidden border border-border/50 bg-muted flex items-center justify-center shadow-inner">
               <img
                 src={previewUrl}
                 alt="Preview"
-                className="max-h-48 w-full object-contain"
+                className="h-full w-full object-cover"
               />
+              <div className="absolute inset-0 pointer-events-none">
+                <CameraFrameGuide />
+              </div>
             </div>
 
             {/* Tips reminder */}
-            <PhotoTips tips={SPECIES_SCAN_TIPS} />
+            <PhotoTips tips={SPECIES_SCAN_TIPS} compact />
 
             {/* Actions */}
             <div className="flex gap-3">

@@ -76,6 +76,9 @@ export const usePlantStore = create<PlantState>((set, _get) => ({
   // Sets loading → fetches → updates plants[] → clears loading.
   //
   fetchPlants: async () => {
+    // Tối ưu hóa: Không gọi lại API nếu đã có dữ liệu trong store
+    if (_get().plants.length > 0) return;
+
     set({ loading: true, error: null });
     try {
       const response = await plantApi.getAll();
@@ -92,20 +95,32 @@ export const usePlantStore = create<PlantState>((set, _get) => ({
   // ─── Fetch Single Plant ───
   //
   // Called when PlantDetail page mounts.
+  // Also syncs the updated plant back into the plants[] array so
+  // Dashboard reflects changes (e.g., has_active_disease after a scan).
   //
   fetchPlant: async (id: number) => {
     if (id < 0) {
       const localPlant = _get().plants.find((p) => p.id === id);
       if (localPlant) {
         set({ selectedPlant: localPlant, error: null, loading: false });
-        return;
       }
+      // Always return for negative IDs — optimistic plant may have been
+      // rolled back already. Never call the API with a negative ID.
+      return;
     }
 
     set({ loading: true, error: null });
     try {
       const response = await plantApi.getById(id);
-      set({ selectedPlant: response.data, loading: false, error: null });
+      const freshPlant = response.data;
+      set((state) => ({
+        selectedPlant: freshPlant,
+        // Sync back into plants[] so Dashboard picks up changes
+        // (e.g., has_active_disease flag after a disease scan)
+        plants: state.plants.map((p) => (p.id === id ? freshPlant : p)),
+        loading: false,
+        error: null,
+      }));
     } catch (error: any) {
       set({
         error: error.response?.data?.detail || 'Plant not found',

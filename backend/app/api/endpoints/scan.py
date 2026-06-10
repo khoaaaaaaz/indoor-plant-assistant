@@ -86,14 +86,14 @@ async def scan_species(
         ai_service = get_ai_service()
         perenual_service = get_perenual_service()
 
-        # Run AI inference in threadpool with a 15-second timeout
+        # Run AI inference in threadpool with a 60-second timeout
         try:
             detected_species, species_confidence = await asyncio.wait_for(
                 run_in_threadpool(ai_service.identify_species, str(file_path)),
-                timeout=15.0
+                timeout=60.0
             )
         except asyncio.TimeoutError:
-            logger.error(f"Species scan timed out after 15s: {file_path}")
+            logger.error(f"Species scan timed out after 60s: {file_path}")
             raise HTTPException(
                 status_code=408,
                 detail="Processing timed out. Please try uploading a smaller or clearer image."
@@ -250,14 +250,14 @@ async def scan_disease(
         ai_service = get_ai_service()
         weather_service = get_weather_service()
         
-        # Run AI inference in threadpool with a 15-second timeout
+        # Run AI inference in threadpool with a 60-second timeout
         try:
             diagnosis = await asyncio.wait_for(
                 run_in_threadpool(ai_service.diagnose_disease, str(file_path)),
-                timeout=15.0
+                timeout=60.0
             )
         except asyncio.TimeoutError:
-            logger.error(f"Disease scan timed out after 15s: {file_path}")
+            logger.error(f"Disease scan timed out after 60s: {file_path}")
             raise HTTPException(
                 status_code=408,
                 detail="Processing timed out. Please try uploading a smaller or clearer image."

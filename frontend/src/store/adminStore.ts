@@ -23,7 +23,7 @@ interface AdminState {
   clearError: () => void;
 }
 
-export const useAdminStore = create<AdminState>((set) => ({
+export const useAdminStore = create<AdminState>((set, get) => ({
   isAdmin: false,
   checkedAccess: false,
   stats: null,
@@ -38,6 +38,8 @@ export const useAdminStore = create<AdminState>((set) => ({
 
   checkAdmin: async () => {
     // Return cached value if already checked to avoid redundant calls on every sidebar render
+    if (get().checkedAccess) return get().isAdmin;
+
     set({ loadingMe: true });
     try {
       const response = await adminApi.checkAccess();
@@ -51,6 +53,8 @@ export const useAdminStore = create<AdminState>((set) => ({
   },
 
   fetchStats: async () => {
+    if (get().stats !== null) return;
+
     set({ loadingStats: true, error: null });
     try {
       const response = await adminApi.getStats();
@@ -77,6 +81,8 @@ export const useAdminStore = create<AdminState>((set) => ({
   },
 
   fetchFeedbackSummary: async () => {
+    if (get().feedbackSummary !== null) return;
+
     set({ loadingSummary: true, error: null });
     try {
       const response = await adminApi.getFeedbackSummary();

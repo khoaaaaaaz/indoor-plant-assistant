@@ -11,7 +11,7 @@ security = HTTPBearer()
 # ========== JWT VERIFICATION ==========
 async def get_current_user(
     credentials = Depends(security),
-    db: Session = Depends()
+    db: Session = Depends(get_db)
 ) -> User:
     """
     WHAT IT DOES: 

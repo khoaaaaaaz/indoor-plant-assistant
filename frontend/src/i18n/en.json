@@ -14,7 +14,9 @@
     "needCare": "Need care today",
     "dailyTasks": "Daily Care Tasks",
     "dailyCareTasks": "Daily Care Tasks",
-    "collection": "Your Plant Collection"
+    "collection": "Your Plant Collection",
+    "careTaskTitle": "Daily Care Due Today!",
+    "careTaskDesc": "You have {{count}} plants that need watering or care today."
   },
   "weather": {
     "title": "Today's Weather",
@@ -34,7 +36,9 @@
     "deferDescription": "The weather is wet — {{count}} plant(s) due for watering could skip today.",
     "deferAction": "Yes, skip today",
     "deferSuccess": "Done! {{count}} plant(s) rescheduled.",
-    "deferError": "Could not update schedules."
+    "deferError": "Could not update schedules.",
+    "smartTitle": "Smart Weather Recommendation",
+    "smartDesc": "High humidity/moisture detected. Consider skipping your watering task for {{count}} plants today."
   },
   "care": {
     "schedule": "Care Schedule",
@@ -151,9 +155,35 @@
     "photoTip3": "Keep the background simple",
     "photoTip4": "Show the affected area clearly",
     "photoTip5": "Only 1 photo per scan",
+    "photoTipSpecies": "Capture the entire plant or main branches",
+    "photoTipNoMulti": "Avoid multiple plants in the frame",
+    "tipDo1": "Focus close on leaf/stem",
+    "tipDont1": "Avoid backlighting",
+    "tipDont2": "Avoid blurry photos",
     "fileTooLarge": "Image is too large (max 10MB). Please choose a smaller photo.",
     "retry": "Retry",
-    "confidence": "confidence"
+    "confidence": "confidence",
+    "uploading": "Uploading image...",
+    "identifying": "Identifying species...",
+    "fetchingCare": "Fetching care data...",
+    "almostReady": "Almost ready...",
+    "plantAdded": "Plant added to your garden! 🌿",
+    "addFailed": "Failed to add plant. Please try again.",
+    "healthUploading": "Uploading scan...",
+    "healthAnalyzing": "Running pathology analysis...",
+    "healthWeather": "Checking local weather conditions...",
+    "healthTreatment": "Consulting treatment database...",
+    "healthRecommendations": "Generating care recommendations...",
+    "compressing": "Compressing leaf photo..."
+  },
+  "nav": {
+    "myGarden": "My Garden",
+    "care": "Care",
+    "settings": "Settings",
+    "adminControl": "Admin Control",
+    "scan": "Scan",
+    "scanPlant": "Scan Plant",
+    "gardenerRole": "Indoor Gardener"
   },
   "disease": {
     "activeAlert": "Active Disease",
@@ -161,13 +191,45 @@
     "resolved": "Resolved",
     "resolvedSuccess": "Disease marked as resolved! 🎉 Care schedule restored.",
     "resolveFailed": "Failed to mark disease as resolved",
-    "markResolved": "Mark as Resolved"
+    "markResolved": "Mark as Resolved",
+    "feedbackSuccess": "Disease marked as resolved & feedback submitted successfully! 🎉",
+    "feedbackError": "Failed to submit treatment feedback",
+    "score1": "Very poor",
+    "score1Desc": "Very poor (Withered/dead)",
+    "score2": "Poor",
+    "score2Desc": "Poor (No improvement)",
+    "score3": "Okay",
+    "score3Desc": "Okay (Slight recovery)",
+    "score4": "Good",
+    "score4Desc": "Good (Significant recovery)",
+    "score5": "Fully recovered",
+    "score5Desc": "Fully recovered! 🎉",
+    "treatmentDuration": "Treatment duration: {{days}} days",
+    "treatmentRemaining": "{{days}} days remaining in treatment",
+    "treatmentComplete": "Treatment period complete. Please rate effectiveness!",
+    "rateTitle": "RATE TREATMENT EFFECTIVENESS",
+    "treatmentNotes": "Treatment notes (Optional)",
+    "treatmentNotesPlaceholder": "Provide details about how you helped your plant recover...",
+    "cancel": "Cancel",
+    "submit": "Submit & Save",
+    "resolveEarly": "Resolved early & Give feedback",
+    "markResolvedRate": "Mark as Resolved & Rate"
   },
   "common": {
     "loading": "Loading...",
     "error": "Something went wrong",
     "backToDashboard": "Back to Dashboard",
     "plants": "plant | plants"
+  },
+
+  "notifications": {
+    "title": "Notifications",
+    "empty": "No notifications yet",
+    "emptyDesc": "You are all caught up! We will notify you when there is something new.",
+    "clearAll": "Clear all",
+    "enableTitle": "Enable Care Reminders",
+    "enableDesc": "Never forget to water or mist! Enable native browser notifications to receive smart watering reminders and weather alerts directly on your device.",
+    "enableButton": "Enable Reminders"
   },
 
   "species": {
@@ -285,5 +347,58 @@
     "Biennial": "Biennial",
     "Slow": "Slow",
     "Fast": "Fast"
+  },
+
+  "admin": {
+    "accessDenied": "Access Denied",
+    "accessDeniedDesc": "You do not have administrative privileges. If you are a developer, please verify that your email is listed inside the <code>ADMIN_EMAILS</code> environment variable inside your backend <code>.env</code> configuration.",
+    "badge": "System Administrator",
+    "title": "Control Center",
+    "subtitle": "System analytics, diagnostic feedback pipelines, and dynamic cache drift auditing.",
+    "totalUsers": "Total Users",
+    "totalPlants": "Total Plants",
+    "totalScans": "Total Scans",
+    "feedbacks": "Feedbacks",
+    "aiAccuracy": "AI Accuracy",
+    "scanTrends": "Scan Activity Trends",
+    "scanTrendsDesc": "Daily scans recorded in the rolling 14-day window.",
+    "noRecentScans": "No recent scan activity",
+    "noRecentScansDesc": "No plants were scanned in the past 14 days.",
+    "scansLabel": "Scans",
+    "diseaseBreakdown": "Disease Breakdown",
+    "diseaseBreakdownDesc": "Distribution of detected diseases.",
+    "ecosystemHealthy": "Ecosystem is healthy",
+    "noDiseases": "No plant diseases have been diagnosed yet.",
+    "casesLabel": "Cases",
+    "feedbackPipeline": "Diagnostic Feedback Pipeline",
+    "feedbackPipelineDesc": "Individual user feedback scores submitted post-treatment. Real-time reviews from garden owners.",
+    "noFeedbackLogs": "No Feedback Logs",
+    "noFeedbackLogsDesc": "User evaluations will automatically appear here once plants recover and users submit surveys.",
+    "colPlantOwner": "Plant & Owner",
+    "colDisease": "Diagnosed Disease",
+    "colAiConf": "AI Conf.",
+    "colRating": "Rating",
+    "colComments": "Survey Comments",
+    "colDate": "Logged Date",
+    "noComment": "No comment submitted",
+    "aggregatedTitle": "Aggregated Treatment Evaluation",
+    "aggregatedDesc": "Evaluation of botanical treatment protocols sorted by diagnosed disease. Helps developers catch drifting cache rules.",
+    "noSummaries": "No aggregated summaries available yet.",
+    "basedOnEvals": "Based on {{count}} user evaluation(s)",
+    "lowSatisfaction": "Low Satisfaction",
+    "avgScore": "Average Score",
+    "highConfScore": "High Conf. Score",
+    "lowConfScore": "Low Conf. Score",
+    "cacheDriftWarning": "Check that cached static LLM advice is valid by using the audit tab."
+  },
+  "notifications": {
+    "welcomeTitle": "🔔 FloraMentor Reminders Enabled!",
+    "welcomeBody": "Your plant care reminders and smart weather alerts are now fully active.",
+    "careTitle": "🌱 Care Tasks Due Today!",
+    "careBodySingular": "You have 1 plant that needs care today. Tap to open FloraMentor.",
+    "careBodyPlural": "You have {{count}} plants that need care today. Tap to open FloraMentor.",
+    "weatherTitle": "🌦️ Smart Weather Recommendation",
+    "weatherBodySingular": "High humidity/moisture detected. Consider skipping your plant watering task today.",
+    "weatherBodyPlural": "High humidity/moisture detected. Consider skipping your {{count}} watering tasks today."
   }
 }

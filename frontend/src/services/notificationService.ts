@@ -6,8 +6,28 @@
  * system notification banners. Uses localStorage to prevent spamming
  * the user with duplicate alerts on the same day.
  */
+import i18n from '@/i18n';
 
 class NotificationService {
+  /** Safely retrieve item from localStorage with try/catch guard */
+  private safeGetItem(key: string): string | null {
+    try {
+      return localStorage.getItem(key);
+    } catch (e) {
+      console.warn('localStorage is not available:', e);
+      return null;
+    }
+  }
+
+  /** Safely store item in localStorage with try/catch guard */
+  private safeSetItem(key: string, value: string): void {
+    try {
+      localStorage.setItem(key, value);
+    } catch (e) {
+      console.warn('localStorage set failed:', e);
+    }
+  }
+
   /** Check if the current browser environment supports the Notifications API */
   public isSupported(): boolean {
     return typeof window !== 'undefined' && 'Notification' in window;
@@ -32,8 +52,9 @@ class NotificationService {
       // If permission is newly granted, throw a lovely welcome notification
       if (permission === 'granted') {
         this.sendNotification(
-          '🔔 FloraMentor Reminders Enabled!',
-          'Your plant care reminders and smart weather alerts are now fully active.'
+          i18n.t('notifications.welcomeTitle', '🔔 FloraMentor Reminders Enabled!'),
+          i18n.t('notifications.welcomeBody', 'Your plant care reminders and smart weather alerts are now fully active.'),
+          { tag: 'fm-welcome' }
         );
       }
       return permission;
@@ -57,7 +78,6 @@ class NotificationService {
         body,
         icon: '/favicon.svg',
         badge: '/favicon.svg',
-        tag: 'floramentor-notification', // replaces prior notification instead of stacking infinite alerts
         ...options,
       });
     } catch (err) {
@@ -73,22 +93,23 @@ class NotificationService {
     if (count <= 0) return;
 
     const todayStr = new Date().toISOString().split('T')[0];
-    const lastNotifiedDate = localStorage.getItem('fm_last_care_reminder_date');
+    const lastNotifiedDate = this.safeGetItem('fm_last_care_reminder_date');
 
     // Only notify if we haven't already sent a care reminder today
     if (lastNotifiedDate !== todayStr) {
-      const title = '🌱 Care Tasks Due Today!';
+      const title = i18n.t('notifications.careTitle', '🌱 Care Tasks Due Today!');
       const body = count === 1
-        ? 'You have 1 plant that needs care today. Tap to open FloraMentor.'
-        : `You have ${count} plants that need care today. Tap to open FloraMentor.`;
+        ? i18n.t('notifications.careBodySingular', 'You have 1 plant that needs care today. Tap to open FloraMentor.')
+        : i18n.t('notifications.careBodyPlural', `You have ${count} plants that need care today. Tap to open FloraMentor.`, { count });
 
-      const notification = this.sendNotification(title, body);
+      const notification = this.sendNotification(title, body, { tag: 'fm-care-reminder' });
       
       if (notification) {
-        localStorage.setItem('fm_last_care_reminder_date', todayStr);
+        this.safeSetItem('fm_last_care_reminder_date', todayStr);
         
         // Custom action: focus the browser tab when notification is clicked
-        notification.onclick = () => {
+        notification.onclick = (event) => {
+          event.preventDefault();
           window.focus();
         };
       }
@@ -102,21 +123,22 @@ class NotificationService {
     if (count <= 0) return;
 
     const todayStr = new Date().toISOString().split('T')[0];
-    const lastNotifiedDate = localStorage.getItem('fm_last_weather_alert_date');
+    const lastNotifiedDate = this.safeGetItem('fm_last_weather_alert_date');
 
     // Only notify if we haven't already sent a weather advice notification today
     if (lastNotifiedDate !== todayStr) {
-      const title = '🌦️ Smart Weather Recommendation';
+      const title = i18n.t('notifications.weatherTitle', '🌦️ Smart Weather Recommendation');
       const body = count === 1
-        ? 'High humidity/moisture detected. Consider skipping your plant watering task today.'
-        : `High humidity/moisture detected. Consider skipping your ${count} watering tasks today.`;
+        ? i18n.t('notifications.weatherBodySingular', 'High humidity/moisture detected. Consider skipping your plant watering task today.')
+        : i18n.t('notifications.weatherBodyPlural', `High humidity/moisture detected. Consider skipping your ${count} watering tasks today.`, { count });
 
-      const notification = this.sendNotification(title, body);
+      const notification = this.sendNotification(title, body, { tag: 'fm-weather-alert' });
       
       if (notification) {
-        localStorage.setItem('fm_last_weather_alert_date', todayStr);
+        this.safeSetItem('fm_last_weather_alert_date', todayStr);
         
-        notification.onclick = () => {
+        notification.onclick = (event) => {
+          event.preventDefault();
           window.focus();
         };
       }
