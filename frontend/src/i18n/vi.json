@@ -60,14 +60,27 @@
     "fertilizeLabel": "Bón phân",
     "rotateLabel": "Xoay chậu",
     "days": {
-      "mon": "T2", "tue": "T3", "wed": "T4",
-      "thu": "T5", "fri": "T6", "sat": "T7", "sun": "CN"
+      "mon": "T2",
+      "tue": "T3",
+      "wed": "T4",
+      "thu": "T5",
+      "fri": "T6",
+      "sat": "T7",
+      "sun": "CN"
     },
     "months": {
-      "0": "Tháng 1", "1": "Tháng 2", "2": "Tháng 3",
-      "3": "Tháng 4", "4": "Tháng 5", "5": "Tháng 6",
-      "6": "Tháng 7", "7": "Tháng 8", "8": "Tháng 9",
-      "9": "Tháng 10", "10": "Tháng 11", "11": "Tháng 12"
+      "0": "Tháng 1",
+      "1": "Tháng 2",
+      "2": "Tháng 3",
+      "3": "Tháng 4",
+      "4": "Tháng 5",
+      "5": "Tháng 6",
+      "6": "Tháng 7",
+      "7": "Tháng 8",
+      "8": "Tháng 9",
+      "9": "Tháng 10",
+      "10": "Tháng 11",
+      "11": "Tháng 12"
     }
   },
   "plant": {
@@ -178,6 +191,7 @@
   },
   "nav": {
     "myGarden": "Vườn của tôi",
+    "plantGallery": "Bộ sưu tập cây",
     "care": "Chăm sóc",
     "settings": "Cài đặt",
     "adminControl": "Quản trị viên",
@@ -221,7 +235,21 @@
     "backToDashboard": "Quay lại trang chính",
     "plants": "cây"
   },
-
+  "garden": {
+    "title": "Vườn của tôi",
+    "subtitle": "Bạn có {{count}} người bạn xanh",
+    "subtitleEmpty": "Khu vườn đang chờ cây đầu tiên của bạn",
+    "searchPlaceholder": "Tìm theo tên hoặc loài...",
+    "noResults": "Không tìm thấy cây",
+    "noResultsDesc": "Không tìm thấy cây nào phù hợp với từ khóa. Hãy thử từ khóa khác.",
+    "addNew": "Thêm cây mới",
+    "waterToday": "Tưới hôm nay",
+    "waterTomorrow": "Ngày mai",
+    "waterOverdue": "Quá hạn",
+    "waterInDays": "Còn {{days}} ngày",
+    "waterNotSet": "Chưa đặt",
+    "activeDisease": "Cần chú ý"
+  },
   "notifications": {
     "title": "Thông báo",
     "empty": "Chưa có thông báo",
@@ -229,9 +257,16 @@
     "clearAll": "Xóa hết",
     "enableTitle": "Bật nhắc nhở chăm sóc",
     "enableDesc": "Đừng quên tưới nước hoặc phun sương! Bật thông báo trình duyệt để nhận nhắc nhở chăm sóc và thời tiết trực tiếp trên thiết bị của bạn.",
-    "enableButton": "Bật nhắc nhở"
+    "enableButton": "Bật nhắc nhở",
+    "welcomeTitle": "🔔 Đã bật nhắc nhở FloraMentor!",
+    "welcomeBody": "Thông báo nhắc nhở chăm sóc và cảnh báo thời tiết thông minh đã được kích hoạt.",
+    "careTitle": "🌱 Nhiệm vụ chăm sóc hôm nay!",
+    "careBodySingular": "Bạn có 1 cây cần chăm sóc hôm nay. Nhấp để mở FloraMentor.",
+    "careBodyPlural": "Bạn có {{count}} cây cần chăm sóc hôm nay. Nhấp để mở FloraMentor.",
+    "weatherTitle": "🌦️ Khuyến nghị thời tiết thông minh",
+    "weatherBodySingular": "Phát hiện độ ẩm cao. Cân nhắc bỏ qua nhiệm vụ tưới nước hôm nay.",
+    "weatherBodyPlural": "Phát hiện độ ẩm cao. Cân nhắc bỏ qua {{count}} nhiệm vụ tưới nước hôm nay."
   },
-
   "species": {
     "African Violet": "Cây tím hoa",
     "Aloe Vera": "Nha đam",
@@ -280,7 +315,6 @@
     "Yucca": "Cây yucca",
     "ZZ Plant": "Cây kim tiền"
   },
-
   "diseases": {
     "Anthracnose": "Bệnh thán thư",
     "Leaf Spot": "Bệnh đốm lá",
@@ -293,7 +327,6 @@
     "Leaf Tip Necrosis": "Hoại tử đầu lá",
     "Healthy": "Khỏe mạnh"
   },
-
   "botanical": {
     "Bright indirect light": "Ánh sáng gián tiếp mạnh",
     "Full sun": "Ánh nắng trực tiếp",
@@ -309,7 +342,6 @@
     "High": "Cao",
     "Unknown": "Không rõ",
     "Low to Medium": "Thấp đến Trung bình",
-
     "Well-drained": "Thoát nước tốt",
     "Sandy": "Đất cát",
     "Loamy": "Đất thịt",
@@ -319,20 +351,17 @@
     "Sphagnum moss": "Rêu sphagnum",
     "Perlite": "Đá perlite",
     "Orchid mix": "Giá thể lan",
-
     "Division": "Tách bụi",
     "Cutting": "Giâm cành",
     "Leaf cutting": "Giâm lá",
     "Stem cutting": "Giâm thân",
     "Plantlets": "Cây con",
     "Seed": "Hạt giống",
-
     "Mealybugs": "Rệp sáp",
     "Spider mites": "Nhện đỏ",
     "Root rot": "Thối rễ",
     "Scale insects": "Rệp vảy",
     "Aphids": "Rệp vừng",
-
     "Herb": "Cây thân thảo",
     "Vine": "Cây leo",
     "Succulent": "Mọng nước",
@@ -341,14 +370,12 @@
     "Fern": "Dương xỉ",
     "Epiphyte": "Cây phụ sinh",
     "Carnivorous": "Cây ăn thịt",
-
     "Perennial": "Lâu năm",
     "Annual": "Hàng năm",
     "Biennial": "Hai năm",
     "Slow": "Chậm",
     "Fast": "Nhanh"
   },
-
   "admin": {
     "accessDenied": "Truy cập bị từ chối",
     "accessDeniedDesc": "Bạn không có quyền quản trị. Nếu bạn là nhà phát triển, vui lòng xác nhận email của bạn có trong biến môi trường <code>ADMIN_EMAILS</code> trong tệp <code>.env</code> của backend.",
@@ -390,15 +417,5 @@
     "highConfScore": "Điểm (tin cậy cao)",
     "lowConfScore": "Điểm (tin cậy thấp)",
     "cacheDriftWarning": "Kiểm tra tính hợp lệ của lời khuyên LLM trong bộ nhớ đệm bằng tab kiểm tra."
-  },
-  "notifications": {
-    "welcomeTitle": "🔔 Đã bật nhắc nhở FloraMentor!",
-    "welcomeBody": "Thông báo nhắc nhở chăm sóc và cảnh báo thời tiết thông minh đã được kích hoạt.",
-    "careTitle": "🌱 Nhiệm vụ chăm sóc hôm nay!",
-    "careBodySingular": "Bạn có 1 cây cần chăm sóc hôm nay. Nhấp để mở FloraMentor.",
-    "careBodyPlural": "Bạn có {{count}} cây cần chăm sóc hôm nay. Nhấp để mở FloraMentor.",
-    "weatherTitle": "🌦️ Khuyến nghị thời tiết thông minh",
-    "weatherBodySingular": "Phát hiện độ ẩm cao. Cân nhắc bỏ qua nhiệm vụ tưới nước hôm nay.",
-    "weatherBodyPlural": "Phát hiện độ ẩm cao. Cân nhắc bỏ qua {{count}} nhiệm vụ tưới nước hôm nay."
   }
 }

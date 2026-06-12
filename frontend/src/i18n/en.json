@@ -60,14 +60,27 @@
     "fertilizeLabel": "Fertilize",
     "rotateLabel": "Rotate",
     "days": {
-      "mon": "Mon", "tue": "Tue", "wed": "Wed",
-      "thu": "Thu", "fri": "Fri", "sat": "Sat", "sun": "Sun"
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "sun": "Sun"
     },
     "months": {
-      "0": "January", "1": "February", "2": "March",
-      "3": "April", "4": "May", "5": "June",
-      "6": "July", "7": "August", "8": "September",
-      "9": "October", "10": "November", "11": "December"
+      "0": "January",
+      "1": "February",
+      "2": "March",
+      "3": "April",
+      "4": "May",
+      "5": "June",
+      "6": "July",
+      "7": "August",
+      "8": "September",
+      "9": "October",
+      "10": "November",
+      "11": "December"
     }
   },
   "plant": {
@@ -178,6 +191,7 @@
   },
   "nav": {
     "myGarden": "My Garden",
+    "plantGallery": "Plant Gallery",
     "care": "Care",
     "settings": "Settings",
     "adminControl": "Admin Control",
@@ -221,7 +235,21 @@
     "backToDashboard": "Back to Dashboard",
     "plants": "plant | plants"
   },
-
+  "garden": {
+    "title": "My Garden",
+    "subtitle": "You have {{count}} beautiful companion(s)",
+    "subtitleEmpty": "Your garden is waiting for its first plant",
+    "searchPlaceholder": "Search by name or species...",
+    "noResults": "No plants found",
+    "noResultsDesc": "We couldn't find any plants matching your search. Try a different term.",
+    "addNew": "Add New Plant",
+    "waterToday": "Water today",
+    "waterTomorrow": "Tomorrow",
+    "waterOverdue": "Overdue",
+    "waterInDays": "In {{days}}d",
+    "waterNotSet": "Not set",
+    "activeDisease": "Needs attention"
+  },
   "notifications": {
     "title": "Notifications",
     "empty": "No notifications yet",
@@ -229,9 +257,16 @@
     "clearAll": "Clear all",
     "enableTitle": "Enable Care Reminders",
     "enableDesc": "Never forget to water or mist! Enable native browser notifications to receive smart watering reminders and weather alerts directly on your device.",
-    "enableButton": "Enable Reminders"
+    "enableButton": "Enable Reminders",
+    "welcomeTitle": "🔔 FloraMentor Reminders Enabled!",
+    "welcomeBody": "Your plant care reminders and smart weather alerts are now fully active.",
+    "careTitle": "🌱 Care Tasks Due Today!",
+    "careBodySingular": "You have 1 plant that needs care today. Tap to open FloraMentor.",
+    "careBodyPlural": "You have {{count}} plants that need care today. Tap to open FloraMentor.",
+    "weatherTitle": "🌦️ Smart Weather Recommendation",
+    "weatherBodySingular": "High humidity/moisture detected. Consider skipping your plant watering task today.",
+    "weatherBodyPlural": "High humidity/moisture detected. Consider skipping your {{count}} watering tasks today."
   },
-
   "species": {
     "African Violet": "African Violet",
     "Aloe Vera": "Aloe Vera",
@@ -280,7 +315,6 @@
     "Yucca": "Yucca",
     "ZZ Plant": "ZZ Plant"
   },
-
   "diseases": {
     "Anthracnose": "Anthracnose",
     "Leaf Spot": "Leaf Spot",
@@ -293,7 +327,6 @@
     "Leaf Tip Necrosis": "Leaf Tip Necrosis",
     "Healthy": "Healthy"
   },
-
   "botanical": {
     "Bright indirect light": "Bright indirect light",
     "Full sun": "Full sun",
@@ -309,7 +342,6 @@
     "High": "High",
     "Unknown": "Unknown",
     "Low to Medium": "Low to Medium",
-
     "Well-drained": "Well-drained",
     "Sandy": "Sandy",
     "Loamy": "Loamy",
@@ -319,20 +351,17 @@
     "Sphagnum moss": "Sphagnum moss",
     "Perlite": "Perlite",
     "Orchid mix": "Orchid mix",
-
     "Division": "Division",
     "Cutting": "Cutting",
     "Leaf cutting": "Leaf cutting",
     "Stem cutting": "Stem cutting",
     "Plantlets": "Plantlets",
     "Seed": "Seed",
-
     "Mealybugs": "Mealybugs",
     "Spider mites": "Spider mites",
     "Root rot": "Root rot",
     "Scale insects": "Scale insects",
     "Aphids": "Aphids",
-
     "Herb": "Herb",
     "Vine": "Vine",
     "Succulent": "Succulent",
@@ -341,14 +370,12 @@
     "Fern": "Fern",
     "Epiphyte": "Epiphyte",
     "Carnivorous": "Carnivorous",
-
     "Perennial": "Perennial",
     "Annual": "Annual",
     "Biennial": "Biennial",
     "Slow": "Slow",
     "Fast": "Fast"
   },
-
   "admin": {
     "accessDenied": "Access Denied",
     "accessDeniedDesc": "You do not have administrative privileges. If you are a developer, please verify that your email is listed inside the <code>ADMIN_EMAILS</code> environment variable inside your backend <code>.env</code> configuration.",
@@ -390,15 +417,5 @@
     "highConfScore": "High Conf. Score",
     "lowConfScore": "Low Conf. Score",
     "cacheDriftWarning": "Check that cached static LLM advice is valid by using the audit tab."
-  },
-  "notifications": {
-    "welcomeTitle": "🔔 FloraMentor Reminders Enabled!",
-    "welcomeBody": "Your plant care reminders and smart weather alerts are now fully active.",
-    "careTitle": "🌱 Care Tasks Due Today!",
-    "careBodySingular": "You have 1 plant that needs care today. Tap to open FloraMentor.",
-    "careBodyPlural": "You have {{count}} plants that need care today. Tap to open FloraMentor.",
-    "weatherTitle": "🌦️ Smart Weather Recommendation",
-    "weatherBodySingular": "High humidity/moisture detected. Consider skipping your plant watering task today.",
-    "weatherBodyPlural": "High humidity/moisture detected. Consider skipping your {{count}} watering tasks today."
   }
 }

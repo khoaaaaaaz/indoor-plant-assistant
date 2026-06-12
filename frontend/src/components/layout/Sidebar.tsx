@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { Show, UserButton, useAuth, useUser } from '@clerk/react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Home, CalendarDays, Scan, Settings, ShieldCheck } from 'lucide-react';
+import { Home, CalendarDays, Scan, Settings, ShieldCheck, Leaf } from 'lucide-react';
 import { useAdminStore } from '@/store/adminStore';
 import { useTranslation } from 'react-i18next';
 
@@ -15,6 +15,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { icon: <Home className="h-5 w-5" />, translationKey: 'nav.myGarden', defaultLabel: 'My Garden', href: '/' },
+  { icon: <Leaf className="h-5 w-5" />, translationKey: 'nav.plantGallery', defaultLabel: 'Plant Gallery', href: '/garden' },
   { icon: <CalendarDays className="h-5 w-5" />, translationKey: 'nav.care', defaultLabel: 'Care', href: '/care' },
   { icon: <Settings className="h-5 w-5" />, translationKey: 'nav.settings', defaultLabel: 'Settings', href: '/settings' },
 ];

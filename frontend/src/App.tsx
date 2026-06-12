@@ -9,6 +9,7 @@ import { SignInButton } from '@clerk/react';
 import Dashboard from './pages/Dashboard';
 import PlantDetail from './pages/PlantDetail';
 import CareSchedule from './pages/CareSchedule';
+import MyGarden from './pages/MyGarden';
 import Settings from './pages/Settings';
 import AdminDashboard from './pages/AdminDashboard';
 
@@ -18,6 +19,7 @@ function App() {
       <Show when="signed-in">
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/garden" element={<MyGarden />} />
           <Route path="/plants/:plantId" element={<PlantDetail />} />
           <Route path="/care" element={<CareSchedule />} />
           <Route path="/settings" element={<Settings />} />

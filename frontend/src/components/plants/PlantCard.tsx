@@ -52,12 +52,13 @@ export const PlantCard = React.memo(function PlantCard({ plant }: PlantCardProps
         }`}>
 
         {/* Image area */}
-        <div className="h-48 overflow-hidden relative bg-muted">
+        <div className="aspect-[4/3] overflow-hidden relative bg-muted">
           {plant.image_url ? (
             <img 
               src={plant.image_url} 
               alt={plant.name}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-accent/40 to-primary/20
@@ -67,11 +68,14 @@ export const PlantCard = React.memo(function PlantCard({ plant }: PlantCardProps
             </div>
           )}
 
+          {/* Subtle gradient overlay for badge readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-transparent pointer-events-none" />
+
           {/* Sunlight badge */}
           {plant.sunlight_requirement && (
             <Badge variant="secondary"
-              className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm
-                text-primary border-0 shadow-sm gap-1">
+              className="absolute top-3 left-3 bg-white/90 dark:bg-card/90 backdrop-blur-md
+                text-primary border-0 shadow-sm gap-1 text-[11px]">
               {getSunlightIcon(plant.sunlight_requirement)}
               {plant.sunlight_requirement}
             </Badge>

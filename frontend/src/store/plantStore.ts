@@ -165,7 +165,7 @@ export const usePlantStore = create<PlantState>((set, _get) => ({
       user_id: 0,
       created_at: new Date().toISOString(),
     } as Plant;
-    
+
     set((state) => ({
       plants: [tempPlant, ...state.plants],
     }));

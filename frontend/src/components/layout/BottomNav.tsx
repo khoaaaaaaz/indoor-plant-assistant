@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Home, Scan, CalendarDays, Settings } from 'lucide-react';
-import { Show, UserButton } from '@clerk/react';
+import { Home, Scan, CalendarDays, Leaf, Settings } from 'lucide-react';
+import { Show } from '@clerk/react';
 import { useTranslation } from 'react-i18next';
 
 export function BottomNav() {
@@ -16,7 +16,7 @@ export function BottomNav() {
       <nav className="fixed bottom-0 left-0 z-50 w-full bg-background/90 backdrop-blur-lg border-t border-border/50 lg:hidden shadow-[0_-4px_20px_rgba(23,49,36,0.06)]">
         <div className="relative flex h-16 items-center justify-between px-6 pb-safe">
           
-          {/* Left Section: My Garden & Care (Care requires auth) */}
+          {/* Left Section: Home & Garden */}
           <div className="flex flex-1 justify-around items-center h-full">
             <Link
               to="/"
@@ -31,14 +31,14 @@ export function BottomNav() {
 
             <Show when="signed-in">
               <Link
-                to="/care"
+                to="/garden"
                 className={`
                   flex flex-col items-center justify-center gap-0.5 w-16 h-full transition-colors cursor-pointer
-                  ${location.pathname === '/care' ? 'text-primary' : 'text-muted-foreground hover:text-primary'}
+                  ${location.pathname === '/garden' ? 'text-primary' : 'text-muted-foreground hover:text-primary'}
                 `}
               >
-                <CalendarDays className="h-5 w-5" />
-                <span className="text-[10px] font-semibold">{t('nav.care', 'Care')}</span>
+                <Leaf className="h-5 w-5" />
+                <span className="text-[10px] font-semibold">{t('nav.plantGallery', 'Gallery')}</span>
               </Link>
             </Show>
           </div>
@@ -56,8 +56,21 @@ export function BottomNav() {
             </div>
           </Show>
 
-          {/* Right Section: Settings & Profile (Profile requires auth) */}
+          {/* Right Section: Care & Settings */}
           <div className="flex flex-1 justify-around items-center h-full">
+            <Show when="signed-in">
+              <Link
+                to="/care"
+                className={`
+                  flex flex-col items-center justify-center gap-0.5 w-16 h-full transition-colors cursor-pointer
+                  ${location.pathname === '/care' ? 'text-primary' : 'text-muted-foreground hover:text-primary'}
+                `}
+              >
+                <CalendarDays className="h-5 w-5" />
+                <span className="text-[10px] font-semibold">{t('nav.care', 'Care')}</span>
+              </Link>
+            </Show>
+
             <Link
               to="/settings"
               className={`
@@ -68,19 +81,6 @@ export function BottomNav() {
               <Settings className="h-5 w-5" />
               <span className="text-[10px] font-semibold">{t('nav.settings', 'Settings')}</span>
             </Link>
-
-            <Show when="signed-in">
-              <div className="flex flex-col items-center justify-center gap-1 w-16 h-full">
-                <UserButton
-                  appearance={{
-                    elements: {
-                      avatarBox: 'h-5 w-5',
-                    },
-                  }}
-                />
-                <span className="text-[10px] font-semibold text-muted-foreground">{t('nav.profile', 'Profile')}</span>
-              </div>
-            </Show>
           </div>
 
         </div>
