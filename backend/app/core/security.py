@@ -1,9 +1,12 @@
 import os
+import logging
 from datetime import datetime, timedelta
 from typing import Optional
 import jwt
 from jwt import PyJWKClient
 from pydantic import BaseModel
+
+logger = logging.getLogger(__name__)
 
 # ============ CLERK JWT TOKEN HANDLING ============
 
@@ -61,5 +64,5 @@ def verify_access_token(token: str) -> Optional[TokenData]:
         return TokenData(sub=sub, email=email)
         
     except Exception as e:
-        print(f"Token verification failed: {e}")
+        logger.warning(f"Token verification failed: {e}")
         return None

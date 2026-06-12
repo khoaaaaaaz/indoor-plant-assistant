@@ -244,6 +244,7 @@ async def scan_disease(
     
     with open(file_path, "wb") as f:
         f.write(image_bytes)
+    del image_bytes  # Free RAM immediately — file is persisted on disk
 
     try:
         # 3. Orchestration
@@ -444,42 +445,46 @@ async def scan_disease(
             except Exception as e:
                 logger.error(f"Failed to delete temp file {file_path}: {e}")
 
-@router.get("/plants/{plant_id}/disease-logs", response_model=list[DiseaseLogResponse])
-async def get_plant_disease_logs(
-    plant_id: int,
-    current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
-):
-    """
-    Get all scans/disease logs for a specific plant.
-    """
-    plant = db.query(Plant).filter(Plant.id == plant_id).first()
-    if not plant:
-        raise HTTPException(status_code=404, detail="Plant not found")
-    if plant.user_id != current_user.id:
-        raise HTTPException(status_code=403, detail="Not authorized")
-    
-    logs = db.query(DiseaseLog).filter(
-        DiseaseLog.plant_id == plant_id
-    ).order_by(DiseaseLog.scanned_at.desc()).all()
-    
-    return logs
-
-@router.get("/disease-logs/{log_id}", response_model=DiseaseLogResponse)
-async def get_disease_log(
-    log_id: int,
-    current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
-):
-    """
-    Get details of a specific disease log/scan.
-    """
-    log = db.query(DiseaseLog).filter(DiseaseLog.id == log_id).first()
-    if not log:
-        raise HTTPException(status_code=404, detail="Disease log not found")
-    
-    plant = log.plant
-    if plant.user_id != current_user.id:
-        raise HTTPException(status_code=403, detail="Not authorized")
-    
-    return log
+# ─── DEPRECATED: Duplicate routes moved to disease_logs.py ──────────
+# These endpoints are now maintained in disease_logs.py as the single
+# source of truth. Kept here as reference for version history.
+#
+# @router.get("/plants/{plant_id}/disease-logs", response_model=list[DiseaseLogResponse])
+# async def get_plant_disease_logs(
+#     plant_id: int,
+#     current_user: User = Depends(get_current_user),
+#     db: Session = Depends(get_db)
+# ):
+#     """
+#     Get all scans/disease logs for a specific plant.
+#     """
+#     plant = db.query(Plant).filter(Plant.id == plant_id).first()
+#     if not plant:
+#         raise HTTPException(status_code=404, detail="Plant not found")
+#     if plant.user_id != current_user.id:
+#         raise HTTPException(status_code=403, detail="Not authorized")
+#
+#     logs = db.query(DiseaseLog).filter(
+#         DiseaseLog.plant_id == plant_id
+#     ).order_by(DiseaseLog.scanned_at.desc()).all()
+#
+#     return logs
+#
+# @router.get("/disease-logs/{log_id}", response_model=DiseaseLogResponse)
+# async def get_disease_log(
+#     log_id: int,
+#     current_user: User = Depends(get_current_user),
+#     db: Session = Depends(get_db)
+# ):
+#     """
+#     Get details of a specific disease log/scan.
+#     """
+#     log = db.query(DiseaseLog).filter(DiseaseLog.id == log_id).first()
+#     if not log:
+#         raise HTTPException(status_code=404, detail="Disease log not found")
+#
+#     plant = log.plant
+#     if plant.user_id != current_user.id:
+#         raise HTTPException(status_code=403, detail="Not authorized")
+#
+#     return log

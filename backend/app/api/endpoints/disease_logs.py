@@ -15,8 +15,8 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(tags=["Disease Logs"])
 
-@router.get("/api/plants/{plant_id}/disease-logs")
-def get_plant_scans(
+@router.get("/api/plants/{plant_id}/disease-logs", response_model=list[DiseaseLogResponse])
+async def get_plant_scans(
     plant_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -25,7 +25,7 @@ def get_plant_scans(
     # Check plant exists and belongs to user
     plant = db.query(Plant).filter(Plant.id == plant_id).first()
     if not plant or plant.user_id != current_user.id:
-        raise HTTPException(status_code=403, detail="Not authorized")
+        raise HTTPException(status_code=404, detail="Plant not found")
     
     # Return all scans for this plant
     scans = db.query(DiseaseLog).filter(
@@ -34,8 +34,8 @@ def get_plant_scans(
     
     return scans
 
-@router.get("/api/disease-logs/{log_id}")
-def get_scan_details(
+@router.get("/api/disease-logs/{log_id}", response_model=DiseaseLogResponse)
+async def get_scan_details(
     log_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -48,7 +48,7 @@ def get_scan_details(
     
     # Check user owns the plant
     if log.plant.user_id != current_user.id:
-        raise HTTPException(status_code=403, detail="Not authorized")
+        raise HTTPException(status_code=404, detail="Scan not found")
     
     return log
 

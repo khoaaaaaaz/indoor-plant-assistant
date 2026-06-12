@@ -14,7 +14,7 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, Query, HTTPException
 from sqlalchemy import func
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 import logging
 
 from app.core.database import get_db
@@ -151,12 +151,14 @@ async def get_admin_feedbacks(
     Retrieve individual user feedback submissions, including plant name and user email.
     Sorted by scanned_at descending.
     """
-    query = db.query(DiseaseLog).filter(
+    base_filter = db.query(DiseaseLog).filter(
         DiseaseLog.feedback_score.isnot(None)
     )
     
-    total = query.count()
-    logs = query.order_by(DiseaseLog.scanned_at.desc()).offset(offset).limit(limit).all()
+    total = base_filter.count()
+    logs = base_filter.options(
+        joinedload(DiseaseLog.plant).joinedload(Plant.owner)
+    ).order_by(DiseaseLog.scanned_at.desc()).offset(offset).limit(limit).all()
     
     items = []
     for log in logs:

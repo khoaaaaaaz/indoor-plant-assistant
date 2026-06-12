@@ -29,7 +29,7 @@ class Plant(Base):
   updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
   owner = relationship("User", back_populates="plants")
-  disease_logs = relationship("DiseaseLog", back_populates="plant", cascade="all, delete-orphan", lazy="joined")
+  disease_logs = relationship("DiseaseLog", back_populates="plant", cascade="all, delete-orphan", lazy="selectin")
   care_history = relationship("CareHistory", back_populates="plant", cascade="all, delete-orphan")
 
   @property

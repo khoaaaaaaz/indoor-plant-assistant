@@ -27,6 +27,7 @@ export default function Dashboard() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [scanOpen, setScanOpen] = useState(searchParams.get('scan') === 'true');
   const { isSignedIn } = useAuth();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (searchParams.get('scan') === 'true') {
@@ -141,7 +142,7 @@ export default function Dashboard() {
     return Math.round(totalScore / plants.length);
   }, [plants]);
 
-  const { t } = useTranslation();
+
 
   return (
     <div className="flex flex-col gap-section-gap">

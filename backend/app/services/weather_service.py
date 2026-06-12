@@ -50,6 +50,8 @@ class WeatherService:
         self.session = requests.Session()
         self.default_lat = DEFAULT_LATITUDE
         self.default_lon = DEFAULT_LONGITUDE
+        self._cache = {}
+        self._cache_ttl = 600  # 10 minutes (600 seconds)
     
     def get_agri_weather(
         self, 
@@ -75,6 +77,15 @@ class WeatherService:
         """
         lat = latitude or self.default_lat
         lon = longitude or self.default_lon
+        
+        cache_key = (round(lat, 2), round(lon, 2))
+        
+        import time
+        if cache_key in self._cache:
+            weather_data, ts = self._cache[cache_key]
+            if time.time() - ts < self._cache_ttl:
+                logger.info(f"Weather fetched from cache: {weather_data['temperature']}°C, {weather_data['humidity']}%")
+                return weather_data
         
         try:
             params = {
@@ -108,6 +119,7 @@ class WeatherService:
                 "location": f"Latitude: {lat}, Longitude: {lon}",
             }
             
+            self._cache[cache_key] = (weather_data, time.time())
             logger.info(f"Weather fetched: {weather_data['temperature']}°C, {weather_data['humidity']}%")
             return weather_data
             

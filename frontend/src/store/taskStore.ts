@@ -120,8 +120,8 @@ export const useTaskStore = create<TaskState>((set, get) => ({
         !sun.includes('low');
       const rotateDays = 7;
 
-      // Generate recurring tasks for a 45-day rolling window
-      for (let offset = 0; offset <= 45; offset++) {
+      // Generate recurring tasks for a 31-day rolling window (covers 1 full calendar month)
+      for (let offset = 0; offset <= 31; offset++) {
         const target = new Date(today);
         target.setDate(today.getDate() + offset);
         const gap = daysBetween(created, target);

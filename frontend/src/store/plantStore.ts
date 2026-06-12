@@ -41,7 +41,7 @@ interface PlantState {
   lastDiseaseResult: Record<number, DiseaseLog | null>;
 
   // Actions
-  fetchPlants: () => Promise<void>;
+  fetchPlants: (forceRefresh?: boolean) => Promise<void>;
   fetchPlant: (id: number) => Promise<void>;
   addPlant: (data: PlantCreate) => Promise<Plant>;
   addPlantOptimistic: (data: PlantCreate) => number;
@@ -75,9 +75,9 @@ export const usePlantStore = create<PlantState>((set, _get) => ({
   // Called when Dashboard mounts.
   // Sets loading → fetches → updates plants[] → clears loading.
   //
-  fetchPlants: async () => {
+  fetchPlants: async (forceRefresh = false) => {
     // Tối ưu hóa: Không gọi lại API nếu đã có dữ liệu trong store
-    if (_get().plants.length > 0) return;
+    if (!forceRefresh && _get().plants.length > 0) return;
 
     set({ loading: true, error: null });
     try {

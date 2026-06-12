@@ -63,6 +63,13 @@ export default function PlantDetail() {
   const { t, i18n } = useTranslation();
   const { isSignedIn } = useAuth();
 
+  // Reset local state when navigating to a different plant
+  useEffect(() => {
+    setCareHistory([]);
+    setDiseaseLogs([]);
+    setExploreData(null);
+  }, [plantId]);
+
   // Fetch disease logs
   useEffect(() => {
     if (isSignedIn && selectedPlant?.id) {
@@ -333,6 +340,9 @@ export default function PlantDetail() {
                 <img
                   src={selectedPlant.image_url}
                   alt={selectedPlant.name}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                   className="w-full h-full object-cover relative z-10 group-hover:scale-105 transition-transform duration-700"
                 />
               ) : (
